@@ -11,7 +11,7 @@
 @interface Radar : NSObject
 
 -(void)runForZoneId:(int)zoneId
-         CustomerId:(int)customerId;
+         AndCustomerId:(int)customerId;
 
 -(void)runForZoneId:(int)zoneId
          CustomerId:(int)customerId

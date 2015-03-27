@@ -13,7 +13,7 @@
 
 @implementation Radar
 
--(void)runForZoneId:(int)zoneId CustomerId:(int)customerId {
+-(void)runForZoneId:(int)zoneId AndCustomerId:(int)customerId {
     [self runForZoneId:zoneId CustomerId:customerId AndProtocol:@"http"];
 }
 
