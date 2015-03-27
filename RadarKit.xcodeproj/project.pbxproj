@@ -7,9 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16FA431C1AC51D12000895C9 /* RadarKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16FA431B1AC51D12000895C9 /* RadarKit.h */; };
-		16FA431E1AC51D12000895C9 /* RadarKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA431D1AC51D12000895C9 /* RadarKit.m */; };
 		16FA43241AC51D12000895C9 /* libRadarKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43181AC51D12000895C9 /* libRadarKit.a */; };
+		16FA43411AC5210B000895C9 /* Radar.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43401AC5210B000895C9 /* Radar.m */; };
+		16FA43441AC529F5000895C9 /* Init.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43431AC529F5000895C9 /* Init.m */; };
+		16FA43471AC52CD6000895C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43461AC52CD6000895C9 /* Foundation.framework */; };
+		16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43451AC52C33000895C9 /* RadarKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		16FA434B1AC52DB0000895C9 /* Init.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43421AC529F5000895C9 /* Init.h */; };
+		16FA434C1AC52DB9000895C9 /* Radar.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA433F1AC5210B000895C9 /* Radar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		16FA434F1AC54640000895C9 /* Providers.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA434D1AC54640000895C9 /* Providers.h */; };
+		16FA43501AC54640000895C9 /* Providers.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA434E1AC54640000895C9 /* Providers.m */; };
+		16FA43571AC55663000895C9 /* Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43551AC55663000895C9 /* Provider.h */; };
+		16FA43581AC55663000895C9 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43561AC55663000895C9 /* Provider.m */; };
+		16FA435B1AC56421000895C9 /* Probe.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43591AC56421000895C9 /* Probe.h */; };
+		16FA435C1AC56421000895C9 /* Probe.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA435A1AC56421000895C9 /* Probe.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +39,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				16FA431C1AC51D12000895C9 /* RadarKit.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,11 +46,21 @@
 
 /* Begin PBXFileReference section */
 		16FA43181AC51D12000895C9 /* libRadarKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRadarKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		16FA431B1AC51D12000895C9 /* RadarKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarKit.h; sourceTree = "<group>"; };
-		16FA431D1AC51D12000895C9 /* RadarKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarKit.m; sourceTree = "<group>"; };
 		16FA43231AC51D12000895C9 /* RadarKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FA43291AC51D12000895C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16FA43321AC51D87000895C9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		16FA433F1AC5210B000895C9 /* Radar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Radar.h; sourceTree = "<group>"; };
+		16FA43401AC5210B000895C9 /* Radar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Radar.m; sourceTree = "<group>"; };
+		16FA43421AC529F5000895C9 /* Init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Init.h; sourceTree = "<group>"; };
+		16FA43431AC529F5000895C9 /* Init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Init.m; sourceTree = "<group>"; };
+		16FA43451AC52C33000895C9 /* RadarKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarKit.h; sourceTree = "<group>"; };
+		16FA43461AC52CD6000895C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		16FA434D1AC54640000895C9 /* Providers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Providers.h; sourceTree = "<group>"; };
+		16FA434E1AC54640000895C9 /* Providers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Providers.m; sourceTree = "<group>"; };
+		16FA43551AC55663000895C9 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
+		16FA43561AC55663000895C9 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
+		16FA43591AC56421000895C9 /* Probe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Probe.h; sourceTree = "<group>"; };
+		16FA435A1AC56421000895C9 /* Probe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Probe.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FA43471AC52CD6000895C9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +86,7 @@
 		16FA430F1AC51D12000895C9 = {
 			isa = PBXGroup;
 			children = (
+				16FA43461AC52CD6000895C9 /* Foundation.framework */,
 				16FA43321AC51D87000895C9 /* README.md */,
 				16FA431A1AC51D12000895C9 /* RadarKit */,
 				16FA43271AC51D12000895C9 /* RadarKitTests */,
@@ -85,8 +106,17 @@
 		16FA431A1AC51D12000895C9 /* RadarKit */ = {
 			isa = PBXGroup;
 			children = (
-				16FA431B1AC51D12000895C9 /* RadarKit.h */,
-				16FA431D1AC51D12000895C9 /* RadarKit.m */,
+				16FA433F1AC5210B000895C9 /* Radar.h */,
+				16FA43401AC5210B000895C9 /* Radar.m */,
+				16FA43421AC529F5000895C9 /* Init.h */,
+				16FA43431AC529F5000895C9 /* Init.m */,
+				16FA43451AC52C33000895C9 /* RadarKit.h */,
+				16FA434D1AC54640000895C9 /* Providers.h */,
+				16FA434E1AC54640000895C9 /* Providers.m */,
+				16FA43551AC55663000895C9 /* Provider.h */,
+				16FA43561AC55663000895C9 /* Provider.m */,
+				16FA43591AC56421000895C9 /* Probe.h */,
+				16FA435A1AC56421000895C9 /* Probe.m */,
 			);
 			path = RadarKit;
 			sourceTree = "<group>";
@@ -109,6 +139,22 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		16FA43491AC52D5C000895C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16FA43571AC55663000895C9 /* Provider.h in Headers */,
+				16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */,
+				16FA434C1AC52DB9000895C9 /* Radar.h in Headers */,
+				16FA435B1AC56421000895C9 /* Probe.h in Headers */,
+				16FA434B1AC52DB0000895C9 /* Init.h in Headers */,
+				16FA434F1AC54640000895C9 /* Providers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		16FA43171AC51D12000895C9 /* RadarKit */ = {
 			isa = PBXNativeTarget;
@@ -117,6 +163,7 @@
 				16FA43141AC51D12000895C9 /* Sources */,
 				16FA43151AC51D12000895C9 /* Frameworks */,
 				16FA43161AC51D12000895C9 /* CopyFiles */,
+				16FA43491AC52D5C000895C9 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -195,7 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16FA431E1AC51D12000895C9 /* RadarKit.m in Sources */,
+				16FA43581AC55663000895C9 /* Provider.m in Sources */,
+				16FA43411AC5210B000895C9 /* Radar.m in Sources */,
+				16FA435C1AC56421000895C9 /* Probe.m in Sources */,
+				16FA43441AC529F5000895C9 /* Init.m in Sources */,
+				16FA43501AC54640000895C9 /* Providers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +347,7 @@
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -305,6 +357,7 @@
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -358,6 +411,7 @@
 				16FA432E1AC51D12000895C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		16FA432F1AC51D12000895C9 /* Build configuration list for PBXNativeTarget "RadarKitTests" */ = {
 			isa = XCConfigurationList;
@@ -366,6 +420,7 @@
 				16FA43311AC51D12000895C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
