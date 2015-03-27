@@ -92,5 +92,5 @@ at [SimpleRadarKitDemo](https://github.com/cedexis/SimpleRadarKitDemo).
 ## Credits
 
 I want to give credit to Sam Soffes.  The steps above for integrating third-party libraries
-come from his [sstoolk.it](http://sstolk.it) site.
+come from his [S.S. Toolkit](http://sstoolk.it/) site.
 
