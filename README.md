@@ -84,6 +84,11 @@ JavaScript tag.  Your zone ID and customer ID are embedded in the URL found in t
 For example, if the tag shows the URL `//radar.cedexis.com/1/12345/radar.js`, then your
 zone ID is `1` and your customer ID is `12345`.
 
+## Sample Application
+
+There is a trivial example application demonstrating this integration technique availabile
+at [SimpleRadarKitDemo](https://github.com/cedexis/SimpleRadarKitDemo);
+
 ## Credits
 
 I want to give credit to Sam Soffes.  The steps above for integrating third-party libraries
