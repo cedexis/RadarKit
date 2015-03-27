@@ -87,7 +87,7 @@ zone ID is `1` and your customer ID is `12345`.
 ## Sample Application
 
 There is a trivial example application demonstrating this integration technique availabile
-at [SimpleRadarKitDemo](https://github.com/cedexis/SimpleRadarKitDemo);
+at [SimpleRadarKitDemo](https://github.com/cedexis/SimpleRadarKitDemo).
 
 ## Credits
 
