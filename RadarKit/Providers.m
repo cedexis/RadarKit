@@ -29,7 +29,7 @@
 }
 
 -(NSString *) url {
-    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json",
+    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1",
         self._protocol,
         self._zoneId,
         self._customerId,

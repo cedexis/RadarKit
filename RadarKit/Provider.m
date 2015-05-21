@@ -50,15 +50,15 @@
     // Cold probe
     NSDictionary * probeData;
     probeData = [protocolData objectForKey:@"a"];
-    if (probeData && [self urlOkayForProtocol:[probeData objectForKey:@"u"]]) {
+    if (probeData) {
         [probes addObject:[[Probe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:1 ObjectType:[[probeData objectForKey:@"t"] intValue]]];
     }
     probeData = [protocolData objectForKey:@"b"];
-    if (probeData && [self urlOkayForProtocol:[probeData objectForKey:@"u"]]) {
+    if (probeData) {
         [probes addObject:[[Probe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:0 ObjectType:[[probeData objectForKey:@"t"] intValue]]];
     }
     probeData = [protocolData objectForKey:@"c"];
-    if (probeData && [self urlOkayForProtocol:[probeData objectForKey:@"u"]]) {
+    if (probeData) {
         [probes addObject:[[Probe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:14 ObjectType:[[probeData objectForKey:@"t"] intValue]]];
     }
     
@@ -71,18 +71,6 @@
                   TransactionId:transactionId
             AndRequestSignature:requestSignature ];
     }
-}
-
--(BOOL)urlOkayForProtocol:(NSString *)url {
-    NSLog(@"Testing %@", url);
-    if ([url hasPrefix:@"//"]) {
-        return YES;
-    } else if ([self._protocol isEqualToString:@"https"] && [url hasPrefix:@"https://"]) {
-        return YES;
-    } else if ([url hasPrefix:@"http://"]) {
-        return YES;
-    }
-    return NO;
 }
 
 @end
