@@ -14,7 +14,7 @@
 @implementation Radar
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId {
-    return [self initWithZoneId:zoneId customerId:customerId protocol:@"http"];
+    return [self initWithZoneId:zoneId customerId:customerId protocol:@"https"];
 }
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId protocol:(NSString *)protocol {
