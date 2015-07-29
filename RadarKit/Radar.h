@@ -10,11 +10,12 @@
 
 @interface Radar : NSObject
 
--(void)runForZoneId:(int)zoneId
-         AndCustomerId:(int)customerId;
+@property (assign, nonatomic) int zoneId;
+@property (assign, nonatomic) int customerId;
+@property (strong, nonatomic) NSString *protocol;
 
--(void)runForZoneId:(int)zoneId
-         CustomerId:(int)customerId
-        AndProtocol:(NSString *)protocol;
+-(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
+
+-(void)run;
 
 @end

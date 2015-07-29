@@ -13,35 +13,45 @@
 
 @implementation Radar
 
--(void)runForZoneId:(int)zoneId AndCustomerId:(int)customerId {
-    [self runForZoneId:zoneId CustomerId:customerId AndProtocol:@"http"];
+-(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId {
+    return [self initWithZoneId:zoneId customerId:customerId protocol:@"http"];
 }
 
--(void)runForZoneId:(int)zoneId CustomerId:(int)customerId AndProtocol:(NSString *)protocol {
+-(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId protocol:(NSString *)protocol {
+    self = [super init];
+    if (self) {
+        _zoneId = zoneId;
+        _customerId = customerId;
+        _protocol = protocol;
+    }
+    return self;
+}
+
+-(void)run {
     //NSLog(@"Hello run: %d %d", zoneId, customerId);
     NSUInteger initTimestamp = [[NSDate date] timeIntervalSince1970];
-    Init * init = [[Init alloc] initWithZoneId:zoneId
-                                CustomerId:customerId
+    Init * init = [[Init alloc] initWithZoneId:self.zoneId
+                                CustomerId:self.customerId
                                  Timestamp:initTimestamp
-                               AndProtocol:protocol ];
+                               AndProtocol:self.protocol ];
     NSLog(@"%@", init);
     NSString * requestSignature = [init makeRequest];
     NSLog(@"Request signature: %@", requestSignature);
     
     Providers * providers = [[Providers alloc]
-        initWithZoneId:zoneId
-            CustomerId:customerId
+        initWithZoneId:self.zoneId
+            CustomerId:self.customerId
       RequestSignature:requestSignature
              Timestamp:initTimestamp
-           AndProtocol:protocol];
+           AndProtocol:self.protocol];
            
     if ([providers requestProviders]) {
         //NSLog(@"%@", providers._sample);
         for (NSDictionary * providerData in providers._sample) {
-            Provider * provider = [[Provider alloc] initWithSample:providerData ForProtocol:protocol];
+            Provider * provider = [[Provider alloc] initWithSample:providerData ForProtocol:self.protocol];
             if (provider) {
-                [provider measureForZone:zoneId
-                                Customer:customerId
+                [provider measureForZone:self.zoneId
+                                Customer:self.customerId
                            TransactionId:init._transactionId
                      AndRequestSignature:requestSignature];
             }
