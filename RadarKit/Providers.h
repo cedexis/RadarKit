@@ -16,13 +16,12 @@
           Timestamp:(unsigned long)timestamp
         AndProtocol:(NSString *)protocol;
 
--(BOOL)requestProviders;
+-(void)requestProvidersWithCompletionHandler:(void(^)(NSArray *samples, NSError *error))handler;
 
 @property int _zoneId;
 @property int _customerId;
 @property NSString * _requestSignature;
 @property unsigned long _timestamp;
 @property NSString * _protocol;
-@property NSMutableArray * _sample;
 
 @end

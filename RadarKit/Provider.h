@@ -11,14 +11,19 @@
 @interface Provider : NSObject
 
 -(id)initWithSample:(NSDictionary *)sample
-        ForProtocol:(NSString *)protocol;
+           protocol:(NSString *)protocol
+               zone:(int)zoneId customerId:(int)customerId
+      transactionId:(unsigned long)transactionId
+   requestSignature:(NSString *)requestSignature;
 
--(void)measureForZone:(int)requestorZoneId
-             Customer:(int)requestorCustomerId
-        TransactionId:(unsigned long)transactionId
-  AndRequestSignature:(NSString *)requestSignature;
+-(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
 
-@property NSDictionary * _sample;
-@property NSString * _protocol;
+@property (strong, nonatomic) NSDictionary * sample;
+@property (strong, nonatomic) NSString * protocol;
+@property (assign, nonatomic) int zoneId;
+@property (assign, nonatomic) int customerId;
+@property (assign, nonatomic) unsigned long transactionId;
+@property (strong, nonatomic) NSString *requestSignature;
+
 
 @end

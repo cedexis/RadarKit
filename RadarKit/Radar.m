@@ -27,37 +27,67 @@
     return self;
 }
 
--(void)run {
-    //NSLog(@"Hello run: %d %d", zoneId, customerId);
+# pragma mark - Public methods
+
+-(void)runInBackground {
+    [self runInBackgroundWithCompletionHandler:nil];
+}
+
+-(void)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
     NSUInteger initTimestamp = [[NSDate date] timeIntervalSince1970];
     Init * init = [[Init alloc] initWithZoneId:self.zoneId
                                 CustomerId:self.customerId
                                  Timestamp:initTimestamp
                                AndProtocol:self.protocol ];
     NSLog(@"%@", init);
-    NSString * requestSignature = [init makeRequest];
-    NSLog(@"Request signature: %@", requestSignature);
-    
-    Providers * providers = [[Providers alloc]
-        initWithZoneId:self.zoneId
-            CustomerId:self.customerId
-      RequestSignature:requestSignature
-             Timestamp:initTimestamp
-           AndProtocol:self.protocol];
-           
-    if ([providers requestProviders]) {
-        //NSLog(@"%@", providers._sample);
-        for (NSDictionary * providerData in providers._sample) {
-            Provider * provider = [[Provider alloc] initWithSample:providerData ForProtocol:self.protocol];
-            if (provider) {
-                [provider measureForZone:self.zoneId
-                                Customer:self.customerId
-                           TransactionId:init._transactionId
-                     AndRequestSignature:requestSignature];
+    [init makeRequestWithCompletionHandler:^(NSString *requestSignature, NSError *error) {
+        NSLog(@"Request signature: %@", requestSignature);
+        
+        Providers * providers = [[Providers alloc]
+                                 initWithZoneId:self.zoneId
+                                 CustomerId:self.customerId
+                                 RequestSignature:requestSignature
+                                 Timestamp:initTimestamp
+                                 AndProtocol:self.protocol];
+        
+        [providers requestProvidersWithCompletionHandler:^(NSArray *samples, NSError *error) {
+            if (error) {
+                if (handler) {
+                    handler(error);
+                }
             }
-        }
+            NSMutableArray *providers = [NSMutableArray array];
+            for (NSDictionary * providerData in samples) {
+                Provider * provider = [[Provider alloc] initWithSample:providerData protocol:self.protocol zone:self.zoneId customerId:self.customerId transactionId:init._transactionId requestSignature:requestSignature];
+                [providers addObject:provider];
+            }
+            [self measureWithProviders:providers completionHandler:^(NSError *error) {
+                NSLog(@"Radar session complete");
+                if (handler) {
+                    handler(error);
+                }
+            }];
+        }];
+        
+    }];
+}
+
+# pragma mark - Private methods
+
+-(void)measureWithProviders:(NSMutableArray *)providers completionHandler:(void(^)(NSError *error))handler {
+    if (providers.count > 0) {
+        Provider *provider = providers.firstObject;
+        [providers removeObjectAtIndex:0];
+        [provider measureWithCompletionHandler:^(NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [self measureWithProviders:providers completionHandler:handler];
+            }
+        }];
+    } else {
+        handler(nil);
     }
-    NSLog(@"Radar session complete");
 }
 
 @end

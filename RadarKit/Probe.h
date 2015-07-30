@@ -11,19 +11,27 @@
 @interface Probe : NSObject
 
 -(id)initWithUrl:(NSString *)url
-    ProbeId:(int)probeId
-    ObjectType:(int)objectType;
+         ProbeId:(int)probeId
+      ObjectType:(int)objectType
+          zoneId:(int)zoneId
+      customerId:(int)customerId
+     ownerZoneId:(int)ownerZoneId
+ ownerCustomerId:(int)ownerCustomerId
+      providerId:(int)providerId
+    trasactionId:(unsigned long)transactionId
+requestSignature:(NSString *)requestSignature;
 
--(BOOL)measureForZoneId:(int)zoneId
-    CustomerId:(int)customerId
-    OwnerZoneId:(int)ownerZoneId
-    OwnerCustomerId:(int)ownerCustomerId
-    ProviderId:(int)providerId
-    TransactionId:(unsigned long)transactionId
-    AndRequestSignature:(NSString *)requestSignature;
+-(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
 
-@property NSString * _url;
-@property int _probeId;
-@property int _objectType;
+@property NSString * url;
+@property int probeId;
+@property int objectType;
+@property int zoneId;
+@property int customerId;
+@property int ownerZoneId;
+@property int ownerCustomerId;
+@property int providerId;
+@property unsigned long transactionId;
+@property NSString *requestSignature;
 
 @end

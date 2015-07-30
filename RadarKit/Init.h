@@ -15,7 +15,7 @@
            Timestamp:(unsigned long)timestamp
          AndProtocol:(NSString *)protocol;
 
-- (NSString *)makeRequest;
+-(void)makeRequestWithCompletionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
 
 @property int _zoneId;
 @property int _customerId;

@@ -16,6 +16,7 @@
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
 
--(void)run;
+-(void)runInBackground;
+-(void)runInBackgroundWithCompletionHandler:(void(^)(NSError *error))handler;
 
 @end

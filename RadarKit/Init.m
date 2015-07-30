@@ -14,14 +14,6 @@
 
 @implementation Init
 
-@synthesize _zoneId;
-@synthesize _customerId;
-@synthesize _majorVersion;
-@synthesize _minorVersion;
-@synthesize _initTimestamp;
-@synthesize _protocol;
-@synthesize _requestSignature;
-
 -(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
     if (self = [super init]) {
         self._zoneId = zoneId;
@@ -61,28 +53,30 @@
     ];
 }
 
--(NSString *)makeRequest {
+-(void)makeRequestWithCompletionHandler:(void(^)(NSString *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self url]];
     NSLog(@"%@", url);
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
     
-    NSHTTPURLResponse *response;
-    NSError *error;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request
-        returningResponse:&response error:&error];
-    
-    if ((nil != data) && (200 == [response statusCode])) {
-        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-        [parser setDelegate:self];
-        [parser parse];
-    }
-    else {
-        NSLog(@"Radar communication error (init)");
-    }
-    
-    return self._requestSignature;
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error == nil) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if ((nil != data) && (200 == httpResponse.statusCode)) {
+                NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+                [parser setDelegate:self];
+                [parser parse];
+            }
+            else {
+                NSLog(@"Radar communication error (init)");
+                error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+            }
+        }
+        if (handler) {
+            handler(self._requestSignature, error);
+        }
+    }];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
