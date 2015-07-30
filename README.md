@@ -59,16 +59,29 @@ At the top of the implementation file, add:
 Then at the exact point where you'd like to _schedule_ a Radar session, add the following code:
 
 ```Objective-C
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    [[[Radar alloc] init]
-        runForZoneId:1
-       AndCustomerId:10660 // <-- Replace this with your own Cedexis customer ID.
+    Radar *radar = [[Radar alloc] initWithZoneId:1 
+                                      customerId:18980 <-- Replace this with your own Cedexis customer ID.
     ];
-});
+    [radar runInBackground];
 
 ```
 
 That's basically all there is to it.
+
+If you'd like to execute code when the background task is finished, you can use:
+
+```Objective-C
+    Radar *radar = [[Radar alloc] initWithZoneId:1 
+    customerId:18980 <-- Replace this with your own Cedexis customer ID.
+    ];
+    [radar runInBackgroundWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            // Handle the error here
+        } else {
+            // Your code here
+        }
+    }];
+```
 
 This code causes the Radar client to be executed as a concurrent task of default priority.
 If you prefer, you can replace the `DISPATCH_QUEUE_PRIORITY_DEFAULT` argument with one of
