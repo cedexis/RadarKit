@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Providers : NSObject
+@interface CDXProviders : NSObject
 
 -(id)initWithZoneId:(int)zoneId
          CustomerId:(int)customerId

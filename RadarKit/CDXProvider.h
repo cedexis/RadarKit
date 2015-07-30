@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Provider : NSObject
+@interface CDXProvider : NSObject
 
 -(id)initWithSample:(NSDictionary *)sample
            protocol:(NSString *)protocol

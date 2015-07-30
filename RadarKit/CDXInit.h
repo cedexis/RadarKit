@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Init : NSObject<NSXMLParserDelegate>
+@interface CDXInit : NSObject<NSXMLParserDelegate>
 
 - (id)initWithZoneId:(int)zoneId
           CustomerId:(int)customerId

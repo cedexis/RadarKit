@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Probe : NSObject
+@interface CDXProbe : NSObject
 
 -(id)initWithUrl:(NSString *)url
          ProbeId:(int)probeId

@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Radar.h"
-#import "Init.h"
-#import "Providers.h"
-#import "Provider.h"
+#import "CDXRadar.h"
+#import "CDXInit.h"
+#import "CDXProviders.h"
+#import "CDXProvider.h"
 
-@implementation Radar
+@implementation CDXRadar
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId {
     return [self initWithZoneId:zoneId customerId:customerId protocol:@"https"];
@@ -35,7 +35,7 @@
 
 -(void)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
     NSUInteger initTimestamp = [[NSDate date] timeIntervalSince1970];
-    Init * init = [[Init alloc] initWithZoneId:self.zoneId
+    CDXInit * init = [[CDXInit alloc] initWithZoneId:self.zoneId
                                 CustomerId:self.customerId
                                  Timestamp:initTimestamp
                                AndProtocol:self.protocol ];
@@ -43,7 +43,7 @@
     [init makeRequestWithCompletionHandler:^(NSString *requestSignature, NSError *error) {
         NSLog(@"Request signature: %@", requestSignature);
         
-        Providers * providers = [[Providers alloc]
+        CDXProviders * providers = [[CDXProviders alloc]
                                  initWithZoneId:self.zoneId
                                  CustomerId:self.customerId
                                  RequestSignature:requestSignature
@@ -58,7 +58,7 @@
             }
             NSMutableArray *providers = [NSMutableArray array];
             for (NSDictionary * providerData in samples) {
-                Provider * provider = [[Provider alloc] initWithSample:providerData protocol:self.protocol zone:self.zoneId customerId:self.customerId transactionId:init._transactionId requestSignature:requestSignature];
+                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData protocol:self.protocol zone:self.zoneId customerId:self.customerId transactionId:init._transactionId requestSignature:requestSignature];
                 [providers addObject:provider];
             }
             [self measureWithProviders:providers completionHandler:^(NSError *error) {
@@ -76,7 +76,7 @@
 
 -(void)measureWithProviders:(NSMutableArray *)providers completionHandler:(void(^)(NSError *error))handler {
     if (providers.count > 0) {
-        Provider *provider = providers.firstObject;
+        CDXProvider *provider = providers.firstObject;
         [providers removeObjectAtIndex:0];
         [provider measureWithCompletionHandler:^(NSError *error) {
             if (error) {

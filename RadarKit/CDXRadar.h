@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Radar : NSObject
+@interface CDXRadar : NSObject
 
 @property (assign, nonatomic) int zoneId;
 @property (assign, nonatomic) int customerId;

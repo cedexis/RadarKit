@@ -59,7 +59,7 @@ At the top of the implementation file, add:
 Then at the exact point where you'd like to _schedule_ a Radar session, add the following code:
 
 ```Objective-C
-    Radar *radar = [[Radar alloc] initWithZoneId:1 
+    CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
                                       customerId:18980 <-- Replace this with your own Cedexis customer ID.
     ];
     [radar runInBackground];
@@ -71,8 +71,8 @@ That's basically all there is to it.
 If you'd like to execute code when the background task is finished, you can use:
 
 ```Objective-C
-    Radar *radar = [[Radar alloc] initWithZoneId:1 
-    customerId:18980 <-- Replace this with your own Cedexis customer ID.
+    CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
+        customerId:18980 <-- Replace this with your own Cedexis customer ID.
     ];
     [radar runInBackgroundWithCompletionHandler:^(NSError *error) {
         if (error) {

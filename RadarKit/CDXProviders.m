@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Providers.h"
+#import "CDXProviders.h"
 
-@implementation Providers
+@implementation CDXProviders
 
 -(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId RequestSignature:(NSString *)requestSignature Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
     if (self = [super init]) {

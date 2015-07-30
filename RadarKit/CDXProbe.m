@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Probe.h"
+#import "CDXProbe.h"
 
-@implementation Probe
+@implementation CDXProbe
 
 -(id)initWithUrl:(NSString *)url
          ProbeId:(int)probeId

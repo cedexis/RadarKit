@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Provider.h"
-#import "Probe.h"
+#import "CDXProvider.h"
+#import "CDXProbe.h"
 
-@implementation Provider
+@implementation CDXProvider
 
 -(id)initWithSample:(NSDictionary *)sample protocol:(NSString *)protocol zone:(int)zoneId customerId:(int)customerId transactionId:(unsigned long)transactionId requestSignature:(NSString *)requestSignature {
     if (self = [super init]) {
@@ -49,15 +49,15 @@
     NSDictionary * probeData;
     probeData = [protocolData objectForKey:@"a"];
     if (probeData) {
-        [probes addObject:[[Probe alloc] initWithUrl:probeData[@"u"] ProbeId:1 ObjectType:[probeData[@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] ProbeId:1 ObjectType:[probeData[@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
     }
     probeData = [protocolData objectForKey:@"b"];
     if (probeData) {
-        [probes addObject:[[Probe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:0 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:0 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
     }
     probeData = [protocolData objectForKey:@"c"];
     if (probeData) {
-        [probes addObject:[[Probe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:14 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:14 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
     }
     return probes;
 }
@@ -69,7 +69,7 @@
 
 - (void)measureWithProbes:(NSMutableArray *)probes completionHandler:(void(^)(NSError *))handler {
     if (probes.count > 0) {
-        Probe *probe = probes.firstObject;
+        CDXProbe *probe = probes.firstObject;
         [probes removeObjectAtIndex:0];
         [probe measureWithCompletionHandler:^(NSError *error) {
             if (error) {

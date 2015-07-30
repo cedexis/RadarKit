@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Init.h"
+#import "CDXInit.h"
 
-@interface Init()
+@interface CDXInit()
 @property NSString * _currentValue;
 @end
 
-@implementation Init
+@implementation CDXInit
 
 -(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
     if (self = [super init]) {
