@@ -51,7 +51,7 @@ requestSignature:(NSString *)requestSignature
         self.requestSignature
     ];
     NSLog(@"Probe URL: %@", rawUrl);
-    NSURL * url = [NSURL URLWithString:self.url];
+    NSURL * url = [NSURL URLWithString:rawUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
     timeoutInterval:20.0 ];
