@@ -7,6 +7,7 @@
 //
 
 #import "CDXProbe.h"
+#import "CDXLogger.h"
 
 @implementation CDXProbe
 
@@ -50,7 +51,7 @@ requestSignature:(NSString *)requestSignature
         self.transactionId,
         self.requestSignature
     ];
-    NSLog(@"Probe URL: %@", rawUrl);
+    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", rawUrl]];
     NSURL * url = [NSURL URLWithString:rawUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
@@ -75,7 +76,7 @@ requestSignature:(NSString *)requestSignature
         }
         NSDate *end = [NSDate date];
         int elapsed = 1000 * [end timeIntervalSinceDate:start];
-        NSLog(@"Elapsed: %ld", (long)elapsed);
+        [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Elapsed: %ld", (long)elapsed]];
         if (elapsed >= 4000) {
             [self reportResult:1 Measurement:0 completionHandler:handler];
         }
@@ -89,7 +90,7 @@ requestSignature:(NSString *)requestSignature
             NSString * fileSize = [self.url substringWithRange:group1];
             int fileSizeHint = [fileSize intValue];
             measurement = 8 * 1000 * fileSizeHint / elapsed;
-            NSLog(@"Throughput: %d", measurement);
+            [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Throughput: %d", measurement]];
         }
         [self reportResult:0 Measurement:measurement completionHandler:handler];
     }];
@@ -109,7 +110,7 @@ requestSignature:(NSString *)requestSignature
         result,
         measurement
     ];
-    NSLog(@"Report URL: %@", rawUrl);
+    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Report URL: %@", rawUrl]];
     
     NSURL * url = [NSURL URLWithString:rawUrl];
     NSURLRequest * request = [NSURLRequest

@@ -10,6 +10,7 @@
 #import "CDXInit.h"
 #import "CDXProviders.h"
 #import "CDXProvider.h"
+#import "CDXLogger.h"
 
 @implementation CDXRadar
 
@@ -39,9 +40,9 @@
                                 CustomerId:self.customerId
                                  Timestamp:initTimestamp
                                AndProtocol:self.protocol ];
-    NSLog(@"%@", init);
+    [[CDXLogger sharedInstance] log:init.description];
     [init makeRequestWithCompletionHandler:^(NSString *requestSignature, NSError *error) {
-        NSLog(@"Request signature: %@", requestSignature);
+        [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Request signature: %@", requestSignature]];
         
         CDXProviders * providers = [[CDXProviders alloc]
                                  initWithZoneId:self.zoneId
@@ -62,7 +63,7 @@
                 [providers addObject:provider];
             }
             [self measureWithProviders:providers completionHandler:^(NSError *error) {
-                NSLog(@"Radar session complete");
+                [[CDXLogger sharedInstance] log:@"Radar session complete"];
                 if (handler) {
                     handler(error);
                 }
@@ -70,6 +71,13 @@
         }];
         
     }];
+}
+
+# pragma mark - Custom setters
+
+-(void)setIsVerbose:(BOOL)isVerbose {
+    _isVerbose = isVerbose;
+    [CDXLogger sharedInstance].isVerbose = isVerbose;
 }
 
 # pragma mark - Private methods

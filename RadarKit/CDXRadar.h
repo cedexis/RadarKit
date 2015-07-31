@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) int zoneId;
 @property (assign, nonatomic) int customerId;
 @property (strong, nonatomic) NSString *protocol;
+@property (assign, nonatomic) BOOL isVerbose;
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId protocol:(NSString *)protocol;
