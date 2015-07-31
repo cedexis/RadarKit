@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *protocol;
 
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
+-(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId protocol:(NSString *)protocol;
 
 -(void)runInBackground;
 -(void)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
