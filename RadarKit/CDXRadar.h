@@ -10,6 +10,8 @@
 
 @interface CDXRadar : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 @property (assign, nonatomic) int zoneId;
 @property (assign, nonatomic) int customerId;
 @property (strong, nonatomic) NSString *protocol;
@@ -17,6 +19,7 @@
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
 
 -(void)runInBackground;
--(void)runInBackgroundWithCompletionHandler:(void(^)(NSError *error))handler;
+-(void)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
 
+NS_ASSUME_NONNULL_END
 @end
