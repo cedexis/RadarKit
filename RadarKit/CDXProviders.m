@@ -6,16 +6,9 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "Providers.h"
+#import "CDXProviders.h"
 
-@implementation Providers
-
-@synthesize _zoneId;
-@synthesize _customerId;
-@synthesize _requestSignature;
-@synthesize _timestamp;
-@synthesize _protocol;
-@synthesize _sample;
+@implementation CDXProviders
 
 -(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId RequestSignature:(NSString *)requestSignature Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
     if (self = [super init]) {
@@ -38,24 +31,29 @@
     ];
 }
 
--(BOOL)requestProviders {
+-(void)requestProvidersWithCompletionHandler:(void(^)(NSArray *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self url]];
     NSLog(@"%@", url);
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
     
-    NSHTTPURLResponse *response;
-    NSError *error;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request
-        returningResponse:&response error:&error];
-    
-    if ((nil != data) && (200 == [response statusCode])) {
-        //NSLog(@"%@", data);
-        self._sample = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        return YES;
-    }
-    NSLog(@"Radar communication error (ProbeServer)");
-    return NO;
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSMutableArray *samples;
+        if (error == nil) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if ((nil != data) && (200 == httpResponse.statusCode)) {
+                //NSLog(@"%@", data);
+                
+                samples = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            } else {
+                NSLog(@"Radar communication error (ProbeServer)");
+                error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+            }
+        }
+        if (handler) {
+            handler(samples, error);
+        }
+    }];
 }
 
 // Generates alpha-numeric-random string

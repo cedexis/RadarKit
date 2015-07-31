@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Init : NSObject<NSXMLParserDelegate>
+@interface CDXInit : NSObject<NSXMLParserDelegate>
 
 - (id)initWithZoneId:(int)zoneId
           CustomerId:(int)customerId
            Timestamp:(unsigned long)timestamp
          AndProtocol:(NSString *)protocol;
 
-- (NSString *)makeRequest;
+-(void)makeRequestWithCompletionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
 
 @property int _zoneId;
 @property int _customerId;

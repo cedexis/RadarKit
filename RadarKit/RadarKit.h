@@ -1,3 +1,3 @@
 
 #import <Foundation/Foundation.h>
-#import <RadarKit/Radar.h>
+#import <RadarKit/CDXRadar.h>
