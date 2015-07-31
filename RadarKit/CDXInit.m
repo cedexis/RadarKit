@@ -7,6 +7,7 @@
 //
 
 #import "CDXInit.h"
+#import "CDXLogger.h"
 
 @interface CDXInit()
 @property NSString * _currentValue;
@@ -55,7 +56,7 @@
 
 -(void)makeRequestWithCompletionHandler:(void(^)(NSString *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self url]];
-    NSLog(@"%@", url);
+    [[CDXLogger sharedInstance] log:url.description];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
@@ -69,7 +70,7 @@
                 [parser parse];
             }
             else {
-                NSLog(@"Radar communication error (init)");
+                [[CDXLogger sharedInstance] log:@"Radar communication error (init)"];
                 error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
             }
         }
@@ -80,14 +81,12 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    //NSLog(@"Element ended: %@", elementName);
     if ([elementName isEqualToString:@"requestSignature"]) {
         self._requestSignature = self._currentValue;
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    //NSLog(@"Found characters: %@", string);
     self._currentValue = string;
 }
 

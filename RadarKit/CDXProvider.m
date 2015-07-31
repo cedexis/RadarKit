@@ -31,7 +31,6 @@
     int ownerCustomerId = [[providerData objectForKey:@"c"] intValue];
     int providerId = [[providerData objectForKey:@"i"] intValue];
     NSDictionary * probesSection = [providerData objectForKey:@"p"];
-    //NSLog(@"%@ %@ %@", ownerZoneId, ownerCustomerId, probesSection);
     
     NSDictionary * protocolData;
     if ([self.protocol isEqualToString:@"https"]) {

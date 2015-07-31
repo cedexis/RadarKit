@@ -7,6 +7,7 @@
 //
 
 #import "CDXProviders.h"
+#import "CDXLogger.h"
 
 @implementation CDXProviders
 
@@ -33,7 +34,7 @@
 
 -(void)requestProvidersWithCompletionHandler:(void(^)(NSArray *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self url]];
-    NSLog(@"%@", url);
+    [[CDXLogger sharedInstance] log:url.description];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
     
@@ -42,11 +43,10 @@
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if ((nil != data) && (200 == httpResponse.statusCode)) {
-                //NSLog(@"%@", data);
                 
                 samples = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             } else {
-                NSLog(@"Radar communication error (ProbeServer)");
+                [[CDXLogger sharedInstance] log:@"Radar communication error (ProbeServer)"];
                 error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
             }
         }
