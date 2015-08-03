@@ -53,7 +53,7 @@
     
     NSDate *start = [NSDate date];
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             [self reportResult:4 Measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
@@ -88,6 +88,7 @@
         }
         [self reportResult:0 Measurement:measurement completionHandler:handler];
     }];
+    [task resume];
 }
 
 -(void)reportResult:(int)result
@@ -112,7 +113,7 @@
            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
        timeoutInterval:6.0 ];
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (!data || (200 != httpResponse.statusCode)) {
@@ -123,6 +124,7 @@
             handler(error);
         }
     }];
+    [task resume];
 }
 
 @end
