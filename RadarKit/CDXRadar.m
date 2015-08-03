@@ -7,8 +7,8 @@
 //
 
 #import "CDXRadar.h"
-#import "CDXInit.h"
-#import "CDXProviders.h"
+#import "CDXInitService.h"
+#import "CDXProviderService.h"
 #import "CDXProvider.h"
 #import "CDXLogger.h"
 
@@ -30,28 +30,25 @@
 
 # pragma mark - Public methods
 
--(void)runInBackground {
-    [self runInBackgroundWithCompletionHandler:nil];
+-(CDXRadarProcess *)runInBackground {
+    return [self runInBackgroundWithCompletionHandler:nil];
 }
 
--(void)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
-    NSUInteger initTimestamp = [[NSDate date] timeIntervalSince1970];
-    CDXInit * init = [[CDXInit alloc] initWithZoneId:self.zoneId
-                                CustomerId:self.customerId
-                                 Timestamp:initTimestamp
-                               AndProtocol:self.protocol ];
-    [[CDXLogger sharedInstance] log:init.description];
-    [init makeRequestWithCompletionHandler:^(NSString *requestSignature, NSError *error) {
+-(CDXRadarProcess *)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
+    CDXRadarProcess *process = [[CDXRadarProcess alloc] initWithRadar:self];
+    CDXInitService *initService = [CDXInitService new];
+//    [[CDXLogger sharedInstance] log:cdxInit.description];
+    [initService getSignatureForProcess:process completionHandler:^(NSString *requestSignature, NSError *error) {
         [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Request signature: %@", requestSignature]];
-        
-        CDXProviders * providers = [[CDXProviders alloc]
-                                 initWithZoneId:self.zoneId
-                                 CustomerId:self.customerId
-                                 RequestSignature:requestSignature
-                                 Timestamp:initTimestamp
-                                 AndProtocol:self.protocol];
-        
-        [providers requestProvidersWithCompletionHandler:^(NSArray *samples, NSError *error) {
+        if (error) {
+            if (handler) {
+                handler(error);
+            }
+            return;
+        }
+        process.requestSignature = requestSignature;
+        CDXProviderService * providerService = [CDXProviderService new];
+        [providerService requestSamplesForProcess:process completionHandler:^(NSArray *samples, NSError *error) {
             if (error) {
                 if (handler) {
                     handler(error);
@@ -59,7 +56,7 @@
             }
             NSMutableArray *providers = [NSMutableArray array];
             for (NSDictionary * providerData in samples) {
-                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData protocol:self.protocol zone:self.zoneId customerId:self.customerId transactionId:init._transactionId requestSignature:requestSignature];
+                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData process:process];
                 [providers addObject:provider];
             }
             [self measureWithProviders:providers completionHandler:^(NSError *error) {
@@ -71,6 +68,7 @@
         }];
         
     }];
+    return process;
 }
 
 # pragma mark - Custom setters

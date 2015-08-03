@@ -12,27 +12,21 @@
 @implementation CDXProbe
 
 -(id)initWithUrl:(NSString *)url
-         ProbeId:(int)probeId
-      ObjectType:(int)objectType
-          zoneId:(int)zoneId
-      customerId:(int)customerId
+         process:(CDXRadarProcess *)process
+         probeId:(int)probeId
+      objectType:(int)objectType
      ownerZoneId:(int)ownerZoneId
  ownerCustomerId:(int)ownerCustomerId
       providerId:(int)providerId
-    trasactionId:(unsigned long)transactionId
-requestSignature:(NSString *)requestSignature
 {
     if (self = [super init]) {
         _url = url;
+        _process = process;
         _probeId = probeId;
         _objectType = objectType;
-        _zoneId = zoneId;
-        _customerId = customerId;
         _ownerZoneId = ownerZoneId;
         _ownerCustomerId = ownerCustomerId;
         _providerId = providerId;
-        _transactionId = transactionId;
-        _requestSignature = requestSignature;
     }
     return self;
 }
@@ -43,13 +37,13 @@ requestSignature:(NSString *)requestSignature
         stringWithFormat:@"%@?rnd=%d-%d-%d-%d-%d-%d-%lu-%@",
         self.url,
         self.probeId,
-        self.zoneId,
-        self.customerId,
+        self.process.radar.zoneId,
+        self.process.radar.customerId,
         self.ownerZoneId,
         self.ownerCustomerId,
         self.providerId,
-        self.transactionId,
-        self.requestSignature
+        self.process.transactionId,
+        self.process.requestSignature
     ];
     [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", rawUrl]];
     NSURL * url = [NSURL URLWithString:rawUrl];
@@ -102,7 +96,7 @@ requestSignature:(NSString *)requestSignature
     
     NSString * rawUrl = [NSString
         stringWithFormat:@"http://rpt.cedexis.com/f1/%@/%d/%d/%d/%d/%d/%d/1/0",
-        self.requestSignature,
+        self.process.requestSignature,
         self.ownerZoneId,
         self.ownerCustomerId,
         self.providerId,

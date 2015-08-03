@@ -11,20 +11,15 @@
 
 @implementation CDXProvider
 
--(id)initWithSample:(NSDictionary *)sample protocol:(NSString *)protocol zone:(int)zoneId customerId:(int)customerId transactionId:(unsigned long)transactionId requestSignature:(NSString *)requestSignature {
+-(id)initWithSample:(NSDictionary *)sample process:(CDXRadarProcess *)process {
     if (self = [super init]) {
         _sample = sample;
-        _protocol = protocol;
-        _zoneId = zoneId;
-        _customerId = customerId;
-        _transactionId = transactionId;
-        _requestSignature = requestSignature;
+        _process = process;
     }
     return self;
 }
 
 -(NSMutableArray *)probesWithSample:(NSDictionary *)sample
-                           protocol:(NSString *)protocol
 {
     NSDictionary * providerData = [self.sample objectForKey:@"p"];
     int ownerZoneId = [[providerData objectForKey:@"z"] intValue];
@@ -33,7 +28,7 @@
     NSDictionary * probesSection = [providerData objectForKey:@"p"];
     
     NSDictionary * protocolData;
-    if ([self.protocol isEqualToString:@"https"]) {
+    if ([self.process.radar.protocol isEqualToString:@"https"]) {
         protocolData = [probesSection objectForKey:@"b"];
         if (!protocolData) {
             protocolData = [probesSection objectForKey:@"a"];
@@ -48,21 +43,21 @@
     NSDictionary * probeData;
     probeData = [protocolData objectForKey:@"a"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] ProbeId:1 ObjectType:[probeData[@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:1 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"b"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:0 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:0 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"c"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:[probeData objectForKey:@"u"] ProbeId:14 ObjectType:[[probeData objectForKey:@"t"] intValue] zoneId:self.zoneId customerId:self.customerId ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId trasactionId:self.transactionId requestSignature:self.requestSignature]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:14 objectType:[[probeData objectForKey:@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     return probes;
 }
 
 -(void)measureWithCompletionHandler:(void (^)(NSError *))handler {
-    NSMutableArray *probes = [self probesWithSample:self.sample protocol:self.protocol];
+    NSMutableArray *probes = [self probesWithSample:self.sample];
     [self measureWithProbes:probes completionHandler:handler];
 }
 

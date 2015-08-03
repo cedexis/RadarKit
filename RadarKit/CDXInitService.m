@@ -6,56 +6,49 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "CDXInit.h"
+#import "CDXInitService.h"
 #import "CDXLogger.h"
 
-@interface CDXInit()
-@property NSString * _currentValue;
+@interface CDXInitService()
+
+@property NSString *currentValue;
+@property NSString *requestSignature;
+
 @end
 
-@implementation CDXInit
+@implementation CDXInitService
 
--(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
-    if (self = [super init]) {
-        self._zoneId = zoneId;
-        self._customerId = customerId;
-        self._majorVersion = 0;
-        self._minorVersion = 2;
-        self._initTimestamp = timestamp;
-        self._transactionId = arc4random();
-        self._protocol = protocol;
-        self._requestSignature = nil;
-    }
-    return self;
-}
+const int majorVersion = 0;
+const int minorVersion = 2;
+const NSString *baseUrl = @"init.cedexis-radar.net";
 
--(NSString *) url {
+-(NSString *) urlWithProcess:(CDXRadarProcess *)process {
     NSString * flag = @"i";
-    if ([self._protocol isEqualToString:@"https"]) {
+    if ([process.radar.protocol isEqualToString:@"https"]) {
         flag = @"s";
     }
     return [NSString stringWithFormat:@"%@://i1-io-%d-%d-%d-%d-%lu-%@.%@/i1/%lu/%lu/xml?seed=i1-io-%d-%d-%d-%d-%lu-%@",
-            self._protocol,
-            self._majorVersion,
-            self._minorVersion,
-            self._zoneId,
-            self._customerId,
-            self._transactionId,
+            process.radar.protocol,
+            majorVersion,
+            minorVersion,
+            process.radar.zoneId,
+            process.radar.customerId,
+            process.transactionId,
             flag,
-            @"init.cedexis-radar.net",
-            self._initTimestamp,
-            self._transactionId,
-            self._majorVersion,
-            self._minorVersion,
-            self._zoneId,
-            self._customerId,
-            self._transactionId,
+            baseUrl,
+            process.timestamp,
+            process.transactionId,
+            majorVersion,
+            minorVersion,
+            process.radar.zoneId,
+            process.radar.customerId,
+            process.transactionId,
             flag
     ];
 }
 
--(void)makeRequestWithCompletionHandler:(void(^)(NSString *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self url]];
+-(void)getSignatureForProcess:(CDXRadarProcess *)process completionHandler:(void(^)(NSString *, NSError *))handler {
+    NSURL * url = [NSURL URLWithString:[self urlWithProcess:process]];
     [[CDXLogger sharedInstance] log:url.description];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url
@@ -75,19 +68,19 @@
             }
         }
         if (handler) {
-            handler(self._requestSignature, error);
+            handler(self.requestSignature, error);
         }
     }];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"requestSignature"]) {
-        self._requestSignature = self._currentValue;
+        self.requestSignature = self.currentValue;
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    self._currentValue = string;
+    self.currentValue = string;
 }
 
 @end

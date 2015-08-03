@@ -6,34 +6,23 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "CDXProviders.h"
+#import "CDXProviderService.h"
 #import "CDXLogger.h"
 
-@implementation CDXProviders
+@implementation CDXProviderService
 
--(id)initWithZoneId:(int)zoneId CustomerId:(int)customerId RequestSignature:(NSString *)requestSignature Timestamp:(unsigned long)timestamp AndProtocol:(NSString *)protocol {
-    if (self = [super init]) {
-        self._zoneId = zoneId;
-        self._customerId = customerId;
-        self._requestSignature = requestSignature;
-        self._timestamp = timestamp;
-        self._protocol = protocol;
-    }
-    return self;
-}
-
--(NSString *) url {
+-(NSString *) urlForProcess:(CDXRadarProcess *)process {
     return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1",
-        self._protocol,
-        self._zoneId,
-        self._customerId,
-        self._timestamp,
+        process.radar.protocol,
+        process.radar.zoneId,
+        process.radar.customerId,
+        process.timestamp,
         [self genRandStringLength:20]
     ];
 }
 
--(void)requestProvidersWithCompletionHandler:(void(^)(NSArray *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self url]];
+-(void)requestSamplesForProcess:(CDXRadarProcess *)process completionHandler:(void(^)(NSArray *, NSError *))handler {
+    NSURL * url = [NSURL URLWithString:[self urlForProcess:process]];
     [[CDXLogger sharedInstance] log:url.description];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];

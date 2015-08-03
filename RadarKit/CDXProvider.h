@@ -7,23 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDXRadarProcess.h"
 
 @interface CDXProvider : NSObject
 
--(id)initWithSample:(NSDictionary *)sample
-           protocol:(NSString *)protocol
-               zone:(int)zoneId customerId:(int)customerId
-      transactionId:(unsigned long)transactionId
-   requestSignature:(NSString *)requestSignature;
+@property (strong, nonatomic) NSDictionary * sample;
+@property (strong, nonatomic) CDXRadarProcess * process;
+
+-(instancetype)initWithSample:(NSDictionary *)sample
+            process:(CDXRadarProcess *)process;
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
-
-@property (strong, nonatomic) NSDictionary * sample;
-@property (strong, nonatomic) NSString * protocol;
-@property (assign, nonatomic) int zoneId;
-@property (assign, nonatomic) int customerId;
-@property (assign, nonatomic) unsigned long transactionId;
-@property (strong, nonatomic) NSString *requestSignature;
-
 
 @end

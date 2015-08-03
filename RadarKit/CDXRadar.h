@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDXRadarProcess.h"
+
+@class CDXRadarProcess;
 
 @interface CDXRadar : NSObject
 
@@ -20,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId;
 -(instancetype)initWithZoneId:(int)zoneId customerId:(int)customerId protocol:(NSString *)protocol;
 
--(void)runInBackground;
--(void)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
+-(CDXRadarProcess *)runInBackground;
+-(CDXRadarProcess *)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
 
 NS_ASSUME_NONNULL_END
 @end

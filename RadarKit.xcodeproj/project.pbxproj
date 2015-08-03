@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		16FA43241AC51D12000895C9 /* libRadarKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43181AC51D12000895C9 /* libRadarKit.a */; };
 		16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43401AC5210B000895C9 /* CDXRadar.m */; };
-		16FA43441AC529F5000895C9 /* CDXInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43431AC529F5000895C9 /* CDXInit.m */; };
+		16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43431AC529F5000895C9 /* CDXInitService.m */; };
 		16FA43471AC52CD6000895C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43461AC52CD6000895C9 /* Foundation.framework */; };
 		16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43451AC52C33000895C9 /* RadarKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16FA434B1AC52DB0000895C9 /* CDXInit.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43421AC529F5000895C9 /* CDXInit.h */; };
+		16FA434B1AC52DB0000895C9 /* CDXInitService.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43421AC529F5000895C9 /* CDXInitService.h */; };
 		16FA434C1AC52DB9000895C9 /* CDXRadar.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA433F1AC5210B000895C9 /* CDXRadar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16FA434F1AC54640000895C9 /* CDXProviders.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA434D1AC54640000895C9 /* CDXProviders.h */; };
-		16FA43501AC54640000895C9 /* CDXProviders.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA434E1AC54640000895C9 /* CDXProviders.m */; };
+		16FA434F1AC54640000895C9 /* CDXProviderService.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA434D1AC54640000895C9 /* CDXProviderService.h */; };
+		16FA43501AC54640000895C9 /* CDXProviderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA434E1AC54640000895C9 /* CDXProviderService.m */; };
 		16FA43571AC55663000895C9 /* CDXProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43551AC55663000895C9 /* CDXProvider.h */; };
 		16FA43581AC55663000895C9 /* CDXProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43561AC55663000895C9 /* CDXProvider.m */; };
 		16FA435B1AC56421000895C9 /* CDXProbe.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43591AC56421000895C9 /* CDXProbe.h */; };
 		16FA435C1AC56421000895C9 /* CDXProbe.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA435A1AC56421000895C9 /* CDXProbe.m */; };
 		3E0774AF1B6C31C10024C50D /* CDXLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774AD1B6C31C10024C50D /* CDXLogger.h */; };
 		3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774AE1B6C31C10024C50D /* CDXLogger.m */; };
+		3E0774B31B6FF9300024C50D /* CDXRadarProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E0774B41B6FF9300024C50D /* CDXRadarProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarProcess.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,18 +55,20 @@
 		16FA43321AC51D87000895C9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		16FA433F1AC5210B000895C9 /* CDXRadar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadar.h; sourceTree = "<group>"; };
 		16FA43401AC5210B000895C9 /* CDXRadar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadar.m; sourceTree = "<group>"; };
-		16FA43421AC529F5000895C9 /* CDXInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXInit.h; sourceTree = "<group>"; };
-		16FA43431AC529F5000895C9 /* CDXInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXInit.m; sourceTree = "<group>"; };
+		16FA43421AC529F5000895C9 /* CDXInitService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXInitService.h; sourceTree = "<group>"; };
+		16FA43431AC529F5000895C9 /* CDXInitService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXInitService.m; sourceTree = "<group>"; };
 		16FA43451AC52C33000895C9 /* RadarKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarKit.h; sourceTree = "<group>"; };
 		16FA43461AC52CD6000895C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		16FA434D1AC54640000895C9 /* CDXProviders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXProviders.h; sourceTree = "<group>"; };
-		16FA434E1AC54640000895C9 /* CDXProviders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviders.m; sourceTree = "<group>"; };
+		16FA434D1AC54640000895C9 /* CDXProviderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXProviderService.h; sourceTree = "<group>"; };
+		16FA434E1AC54640000895C9 /* CDXProviderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderService.m; sourceTree = "<group>"; };
 		16FA43551AC55663000895C9 /* CDXProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXProvider.h; sourceTree = "<group>"; };
 		16FA43561AC55663000895C9 /* CDXProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProvider.m; sourceTree = "<group>"; };
 		16FA43591AC56421000895C9 /* CDXProbe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXProbe.h; sourceTree = "<group>"; };
 		16FA435A1AC56421000895C9 /* CDXProbe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProbe.m; sourceTree = "<group>"; };
 		3E0774AD1B6C31C10024C50D /* CDXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXLogger.h; sourceTree = "<group>"; };
 		3E0774AE1B6C31C10024C50D /* CDXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXLogger.m; sourceTree = "<group>"; };
+		3E0774B11B6FF9300024C50D /* CDXRadarProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadarProcess.h; sourceTree = "<group>"; };
+		3E0774B21B6FF9300024C50D /* CDXRadarProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarProcess.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,16 +117,18 @@
 				16FA43451AC52C33000895C9 /* RadarKit.h */,
 				16FA433F1AC5210B000895C9 /* CDXRadar.h */,
 				16FA43401AC5210B000895C9 /* CDXRadar.m */,
-				16FA43421AC529F5000895C9 /* CDXInit.h */,
-				16FA43431AC529F5000895C9 /* CDXInit.m */,
-				16FA434D1AC54640000895C9 /* CDXProviders.h */,
-				16FA434E1AC54640000895C9 /* CDXProviders.m */,
+				16FA43421AC529F5000895C9 /* CDXInitService.h */,
+				16FA43431AC529F5000895C9 /* CDXInitService.m */,
+				16FA434D1AC54640000895C9 /* CDXProviderService.h */,
+				16FA434E1AC54640000895C9 /* CDXProviderService.m */,
 				16FA43551AC55663000895C9 /* CDXProvider.h */,
 				16FA43561AC55663000895C9 /* CDXProvider.m */,
 				16FA43591AC56421000895C9 /* CDXProbe.h */,
 				16FA435A1AC56421000895C9 /* CDXProbe.m */,
 				3E0774AD1B6C31C10024C50D /* CDXLogger.h */,
 				3E0774AE1B6C31C10024C50D /* CDXLogger.m */,
+				3E0774B11B6FF9300024C50D /* CDXRadarProcess.h */,
+				3E0774B21B6FF9300024C50D /* CDXRadarProcess.m */,
 			);
 			path = RadarKit;
 			sourceTree = "<group>";
@@ -152,11 +158,12 @@
 			files = (
 				3E0774AF1B6C31C10024C50D /* CDXLogger.h in Headers */,
 				16FA43571AC55663000895C9 /* CDXProvider.h in Headers */,
+				3E0774B31B6FF9300024C50D /* CDXRadarProcess.h in Headers */,
 				16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */,
 				16FA434C1AC52DB9000895C9 /* CDXRadar.h in Headers */,
 				16FA435B1AC56421000895C9 /* CDXProbe.h in Headers */,
-				16FA434B1AC52DB0000895C9 /* CDXInit.h in Headers */,
-				16FA434F1AC54640000895C9 /* CDXProviders.h in Headers */,
+				16FA434B1AC52DB0000895C9 /* CDXInitService.h in Headers */,
+				16FA434F1AC54640000895C9 /* CDXProviderService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,9 +259,10 @@
 				16FA43581AC55663000895C9 /* CDXProvider.m in Sources */,
 				16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */,
 				16FA435C1AC56421000895C9 /* CDXProbe.m in Sources */,
-				16FA43441AC529F5000895C9 /* CDXInit.m in Sources */,
-				16FA43501AC54640000895C9 /* CDXProviders.m in Sources */,
+				16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */,
+				16FA43501AC54640000895C9 /* CDXProviderService.m in Sources */,
 				3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */,
+				3E0774B41B6FF9300024C50D /* CDXRadarProcess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
