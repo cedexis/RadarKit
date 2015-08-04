@@ -1,13 +1,20 @@
-# RadarKit
+RadarKit
+========
 
 A Cedexis Radar client for iOS.
 
-## Simple Integration
+## Installation with CocoaPods
 
-The first step is to add the RadarKit project into your own project.  There are two principle ways to do that:
+RadarKit is available on [CocoaPods](http://www.cocoapods.org). Add the following to your `Podfile`:
 
-1. downloading the code from Github
-2. using a git submodule.
+    pod 'RadarKit'
+
+## Manual installation
+
+The first step is to add the RadarKit project into your own project. There are two principle ways to do that:
+
+1. Downloading the code from Github.
+2. Using a git submodule.
 
 ### Downloading from Github
 
@@ -45,7 +52,7 @@ $ git submodule add https://github.com/cedexis/RadarKit.git Vendor/RadarKit
 
 7. Add -all_load and -ObjC to _Other Linker Flags_.
 
-## Executing Radar Sessions
+## Usage: Executing Radar Sessions
 
 A typical Radar session downloads at most a few dozen files in a span of about 10 seconds.
 
@@ -59,41 +66,46 @@ At the top of the implementation file, add:
 Then at the exact point where you'd like to _schedule_ a Radar session, add the following code:
 
 ```Objective-C
-    CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
-                                      customerId:18980 <-- Replace this with your own Cedexis customer ID.
-    ];
-    [radar runInBackground];
-
+CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
+                                        customerId:XXXXX <-- Replace this with your own Cedexis customer ID.
+];
+[radar runInBackground];
 ```
 
 That's basically all there is to it.
 
+The default protocol used by RadarKit is HTTPS. If you need to use HTTP, you can set it up using the alternate initialization:
+
+```Objective-C
+CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
+                                        customerId:XXXXX <-- Replace this with your own Cedexis customer ID.
+                                          protocol:@"http"
+];
+```
 If you'd like to execute code when the background task is finished, you can use:
 
 ```Objective-C
-    CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
-        customerId:18980 <-- Replace this with your own Cedexis customer ID.
-    ];
-    [radar runInBackgroundWithCompletionHandler:^(NSError *error) {
-        if (error) {
-            // Handle the error here
-        } else {
-            // Your code here
-        }
-    }];
+[radar runInBackgroundWithCompletionHandler:^(NSError *error) {
+    if (error) {
+        // Handle the error here
+    } else {
+        // Your code here
+    }
+}];
 ```
 
-This code causes the Radar client to be executed as a concurrent task of default priority.
-If you prefer, you can replace the `DISPATCH_QUEUE_PRIORITY_DEFAULT` argument with one of
-the other options in order to cause Radar to run at a higher or lower priority.  See
-[dispatch_queue_priority_t](https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/index.html#//apple_ref/doc/constant_group/dispatch_queue_priority_t).
+To make RadarKit log all activity to the console, including errors and successful messages, add the following before executing the `runInBackground` method:
+
+```Objective-C
+radar.isVerbose = YES;
+```
 
 Be sure to supply your own Cedexis zone and customer IDs as arguments to the Radar class's
 runForZone:AndCustomerId method.
 
 If you don't know these, they can be obtained from the Cedexis portal at the following URL:
-https://portal.cedexis.com/ui/radar/tag.  This page lists the standard Cedexis Radar
-JavaScript tag.  Your zone ID and customer ID are embedded in the URL found in the tag.
+https://portal.cedexis.com/ui/radar/tag. This page lists the standard Cedexis Radar
+JavaScript tag. Your zone ID and customer ID are embedded in the URL found in the tag.
 For example, if the tag shows the URL `//radar.cedexis.com/1/12345/radar.js`, then your
 zone ID is `1` and your customer ID is `12345`.
 
@@ -104,6 +116,6 @@ at [SimpleRadarKitDemo](https://github.com/cedexis/SimpleRadarKitDemo).
 
 ## Credits
 
-We'd like to give credit to Sam Soffes.  The steps above for integrating third-party libraries
+We'd like to give credit to Sam Soffes. The steps above for integrating third-party libraries
 come from his [S.S. Toolkit](http://sstoolk.it/) site.
 
