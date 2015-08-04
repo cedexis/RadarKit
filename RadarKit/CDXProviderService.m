@@ -31,8 +31,8 @@
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if ((nil != data) && (200 == httpResponse.statusCode)) {
-                
                 samples = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", (unsigned long)samples.count]];
             } else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (ProbeServer)"];
                 error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
