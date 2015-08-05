@@ -11,7 +11,7 @@
 
 @class CDXRadar;
 
-@interface CDXRadarProcess : NSObject
+@interface CDXRadarSession : NSObject
 
 @property (strong, nonatomic) CDXRadar *radar;
 @property (assign, nonatomic) unsigned long timestamp;

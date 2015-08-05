@@ -1,4 +1,4 @@
 
 #import <Foundation/Foundation.h>
 #import <RadarKit/CDXRadar.h>
-#import <RadarKit/CDXRadarProcess.h>
+#import <RadarKit/CDXRadarSession.h>

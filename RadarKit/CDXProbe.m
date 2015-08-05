@@ -12,7 +12,7 @@
 @implementation CDXProbe
 
 -(id)initWithUrl:(NSString *)url
-         process:(CDXRadarProcess *)process
+         process:(CDXRadarSession *)process
          probeId:(int)probeId
       objectType:(int)objectType
      ownerZoneId:(int)ownerZoneId

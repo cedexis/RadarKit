@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
 @interface CDXInitService : NSObject<NSXMLParserDelegate>
 
--(void)getSignatureForProcess:(CDXRadarProcess *)radarProcess completionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
+-(void)getSignatureForSession:(CDXRadarSession *)radarProcess completionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
 
 @end

@@ -30,15 +30,15 @@
 
 # pragma mark - Public methods
 
--(CDXRadarProcess *)runInBackground {
+-(CDXRadarSession *)runInBackground {
     return [self runInBackgroundWithCompletionHandler:nil];
 }
 
--(CDXRadarProcess *)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
-    CDXRadarProcess *process = [[CDXRadarProcess alloc] initWithRadar:self];
+-(CDXRadarSession *)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
+    CDXRadarSession *session = [[CDXRadarSession alloc] initWithRadar:self];
     CDXInitService *initService = [CDXInitService new];
 //    [[CDXLogger sharedInstance] log:cdxInit.description];
-    [initService getSignatureForProcess:process completionHandler:^(NSString *requestSignature, NSError *error) {
+    [initService getSignatureForSession:session completionHandler:^(NSString *requestSignature, NSError *error) {
         [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Request signature: %@", requestSignature]];
         if (error) {
             if (handler) {
@@ -46,9 +46,9 @@
             }
             return;
         }
-        process.requestSignature = requestSignature;
+        session.requestSignature = requestSignature;
         CDXProviderService * providerService = [CDXProviderService new];
-        [providerService requestSamplesForProcess:process completionHandler:^(NSArray *samples, NSError *error) {
+        [providerService requestSamplesForSession:session completionHandler:^(NSArray *samples, NSError *error) {
             if (error) {
                 if (handler) {
                     handler(error);
@@ -56,7 +56,7 @@
             }
             NSMutableArray *providers = [NSMutableArray array];
             for (NSDictionary * providerData in samples) {
-                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData process:process];
+                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData session:session];
                 [providers addObject:provider];
             }
             [self measureWithProviders:providers completionHandler:^(NSError *error) {
@@ -68,7 +68,7 @@
         }];
         
     }];
-    return process;
+    return session;
 }
 
 # pragma mark - Custom setters

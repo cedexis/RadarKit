@@ -11,7 +11,7 @@
 
 @implementation CDXProviderService
 
--(NSString *) urlForProcess:(CDXRadarProcess *)process {
+-(NSString *) urlForProcess:(CDXRadarSession *)process {
     return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1",
         process.radar.protocol,
         process.radar.zoneId,
@@ -21,7 +21,7 @@
     ];
 }
 
--(void)requestSamplesForProcess:(CDXRadarProcess *)process completionHandler:(void(^)(NSArray *, NSError *))handler {
+-(void)requestSamplesForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSArray *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self urlForProcess:process]];
     [[CDXLogger sharedInstance] log:url.description];
     NSURLRequest *request = [NSURLRequest requestWithURL:url

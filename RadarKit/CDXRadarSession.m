@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
-@implementation CDXRadarProcess
+@implementation CDXRadarSession
 
 - (instancetype)initWithRadar:(CDXRadar *)radar
 {

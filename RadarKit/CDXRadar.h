@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
-@class CDXRadarProcess;
+@class CDXRadarSession;
 
 @interface CDXRadar : NSObject
 
@@ -55,13 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Starts a Radar session by making asynchronous requests without blocking the main thread.
  */
--(CDXRadarProcess *)runInBackground;
+-(CDXRadarSession *)runInBackground;
 /**
  *  Starts a Radar session by making asynchronous requests without blocking the main thread and executes a block when finished.
  *
  *  @param handler Block of code to execute when the Radar session has finished.
  */
--(CDXRadarProcess *)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
+-(CDXRadarSession *)runInBackgroundWithCompletionHandler:(nullable void(^)(NSError *error))handler;
 
 NS_ASSUME_NONNULL_END
 @end

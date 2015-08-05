@@ -11,7 +11,7 @@
 
 @implementation CDXProvider
 
--(id)initWithSample:(NSDictionary *)sample process:(CDXRadarProcess *)process {
+-(id)initWithSample:(NSDictionary *)sample session:(CDXRadarSession *)process {
     if (self = [super init]) {
         _sample = sample;
         _process = process;

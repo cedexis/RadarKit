@@ -22,7 +22,7 @@ const int majorVersion = 0;
 const int minorVersion = 2;
 const NSString *baseUrl = @"init.cedexis-radar.net";
 
--(NSString *) urlWithProcess:(CDXRadarProcess *)process {
+-(NSString *) urlWithProcess:(CDXRadarSession *)process {
     NSString * flag = @"i";
     if ([process.radar.protocol isEqualToString:@"https"]) {
         flag = @"s";
@@ -47,7 +47,7 @@ const NSString *baseUrl = @"init.cedexis-radar.net";
     ];
 }
 
--(void)getSignatureForProcess:(CDXRadarProcess *)process completionHandler:(void(^)(NSString *, NSError *))handler {
+-(void)getSignatureForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSString *, NSError *))handler {
     NSURL * url = [NSURL URLWithString:[self urlWithProcess:process]];
     [[CDXLogger sharedInstance] log:url.description];
     

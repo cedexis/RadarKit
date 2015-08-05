@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
 @interface CDXProvider : NSObject
 
 @property (strong, nonatomic) NSDictionary * sample;
-@property (strong, nonatomic) CDXRadarProcess * process;
+@property (strong, nonatomic) CDXRadarSession * process;
 
 -(instancetype)initWithSample:(NSDictionary *)sample
-            process:(CDXRadarProcess *)process;
+            session:(CDXRadarSession *)process;
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
 

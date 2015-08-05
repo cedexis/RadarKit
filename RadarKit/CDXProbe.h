@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
 @interface CDXProbe : NSObject
 
 -(id)initWithUrl:(NSString *)url
-         process:(CDXRadarProcess *)process
+         process:(CDXRadarSession *)process
          probeId:(int)probeId
       objectType:(int)objectType
      ownerZoneId:(int)ownerZoneId
@@ -22,7 +22,7 @@
 -(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
 
 @property NSString * url;
-@property CDXRadarProcess *process;
+@property CDXRadarSession *process;
 @property int probeId;
 @property int objectType;
 @property int ownerZoneId;

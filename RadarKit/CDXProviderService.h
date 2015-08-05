@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "CDXInitService.h"
-#import "CDXRadarProcess.h"
+#import "CDXRadarSession.h"
 
 @interface CDXProviderService : NSObject
 
--(void)requestSamplesForProcess:(CDXRadarProcess *)process completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
+-(void)requestSamplesForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
 
 @end
