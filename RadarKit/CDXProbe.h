@@ -12,7 +12,7 @@
 @interface CDXProbe : NSObject
 
 -(id)initWithUrl:(NSString *)url
-         process:(CDXRadarSession *)process
+         session:(CDXRadarSession *)session
          probeId:(int)probeId
       objectType:(int)objectType
      ownerZoneId:(int)ownerZoneId
@@ -20,13 +20,15 @@
       providerId:(int)providerId;
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
+-(NSString *)reportUrlForResult:(int)result measurement:(int)measurement;
+-(NSString *)probeUrl;
 
-@property NSString * url;
-@property CDXRadarSession *process;
-@property int probeId;
-@property int objectType;
-@property int ownerZoneId;
-@property int ownerCustomerId;
-@property int providerId;
+@property (strong, nonatomic) NSString * url;
+@property (strong, nonatomic) CDXRadarSession *session;
+@property (assign, nonatomic) int probeId;
+@property (assign, nonatomic) int objectType;
+@property (assign, nonatomic) int ownerZoneId;
+@property (assign, nonatomic) int ownerCustomerId;
+@property (assign, nonatomic) int providerId;
 
 @end

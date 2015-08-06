@@ -43,15 +43,15 @@
     NSDictionary * probeData;
     probeData = [protocolData objectForKey:@"a"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:1 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] session:self.process probeId:1 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"b"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:0 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] session:self.process probeId:0 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"c"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:14 objectType:[[probeData objectForKey:@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] session:self.process probeId:14 objectType:[[probeData objectForKey:@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     return probes;
 }

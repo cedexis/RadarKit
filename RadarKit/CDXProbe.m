@@ -12,7 +12,7 @@
 @implementation CDXProbe
 
 -(id)initWithUrl:(NSString *)url
-         process:(CDXRadarSession *)process
+         session:(CDXRadarSession *)session
          probeId:(int)probeId
       objectType:(int)objectType
      ownerZoneId:(int)ownerZoneId
@@ -21,7 +21,7 @@
 {
     if (self = [super init]) {
         _url = url;
-        _process = process;
+        _session = session;
         _probeId = probeId;
         _objectType = objectType;
         _ownerZoneId = ownerZoneId;
@@ -31,22 +31,26 @@
     return self;
 }
 
--(void)measureWithCompletionHandler:(void(^)(NSError *))handler {
-    
-    NSString * rawUrl = [NSString
+-(NSString *)probeUrl {
+    return [NSString
         stringWithFormat:@"%@?rnd=%d-%d-%d-%d-%d-%d-%lu-%@",
         self.url,
         self.probeId,
-        self.process.radar.zoneId,
-        self.process.radar.customerId,
+        self.session.radar.zoneId,
+        self.session.radar.customerId,
         self.ownerZoneId,
         self.ownerCustomerId,
         self.providerId,
-        self.process.transactionId,
-        self.process.requestSignature
+        self.session.transactionId,
+        self.session.requestSignature
     ];
-    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", rawUrl]];
-    NSURL * url = [NSURL URLWithString:rawUrl];
+}
+
+-(void)measureWithCompletionHandler:(void(^)(NSError *))handler {
+    
+    NSString * probeUrl = self.probeUrl;
+    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", probeUrl]];
+    NSURL * url = [NSURL URLWithString:probeUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
     timeoutInterval:20.0 ];
@@ -91,13 +95,18 @@
     [task resume];
 }
 
--(void)reportResult:(int)result
-        Measurement:(int)measurement
-  completionHandler:(void(^)(NSError *error))handler {
-    
-    NSString * rawUrl = [NSString
+/**
+ *  Builds a URL that can be used for reporting a measurement
+ *
+ *  @param result      Measurement result code
+ *  @param measurement Throughput measured
+ *
+ *  @return The URL as NSString
+ */
+-(NSString *)reportUrlForResult:(int)result measurement:(int)measurement {
+    return [NSString
         stringWithFormat:@"http://rpt.cedexis.com/f1/%@/%d/%d/%d/%d/%d/%d/1/0",
-        self.process.requestSignature,
+        self.session.requestSignature,
         self.ownerZoneId,
         self.ownerCustomerId,
         self.providerId,
@@ -105,9 +114,23 @@
         result,
         measurement
     ];
-    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Report URL: %@", rawUrl]];
+}
+
+/**
+ *  Reports the result of a measurement
+ *
+ *  @param result      Measurement result code
+ *  @param measurement Throughput measured
+ *  @param handler     Callback block
+ */
+-(void)reportResult:(int)result
+        Measurement:(int)measurement
+  completionHandler:(void(^)(NSError *error))handler {
     
-    NSURL * url = [NSURL URLWithString:rawUrl];
+    NSString * reportUrl = [self reportUrlForResult:result measurement:measurement];
+    [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Report URL: %@", reportUrl]];
+    
+    NSURL * url = [NSURL URLWithString:reportUrl];
     NSURLRequest * request = [NSURLRequest
         requestWithURL:url
            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
