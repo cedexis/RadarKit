@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name          = "RadarKit"
-    s.version       = "0.1.0"
+    s.version       = "0.1.2"
     s.summary       = "A Cedexis Radar client for iOS."
     s.homepage      = "https://github.com/cedexis/radarkit"
     s.license       = { :type => 'MIT', :text => 'The MIT License (MIT)
