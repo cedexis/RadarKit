@@ -12,7 +12,7 @@
 @interface CDXProvider : NSObject
 
 @property (strong, nonatomic) NSDictionary * sample;
-@property (strong, nonatomic) CDXRadarSession * process;
+@property (strong, nonatomic) CDXRadarSession * session;
 
 -(instancetype)initWithSample:(NSDictionary *)sample
             session:(CDXRadarSession *)process;

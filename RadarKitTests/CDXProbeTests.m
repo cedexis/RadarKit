@@ -36,12 +36,12 @@
     probe.ownerZoneId = 0;
     probe.ownerCustomerId = 0;
     probe.providerId = 32;
-    probe.probeId = 14;
+    probe.probeId = CDXProbeIdThroughput;
     NSString *url = [probe reportUrlForResult:0 measurement:3041];
     XCTAssertTrue([url isEqualToString:expectedUrl]);
 }
 
-- (void)testProbeUrl {
+- (void)testProbeUrlForCold {
     NSString *expectedUrl = @"http://fastlybench.cedexis.com/img/90/r20.gif?rnd=1-1-18980-0-0-90-833515866-BeGkaMLVeaayaIigcaeqPjqbknRIUy0dmpdQJQ4fopdQJQ4fqmR6TzKpsHqiardFarJbDIckGidabcIfGicGbfc9JEShwHaiarcuarIVBsaakn2lGkaeyabQe2j1DhrVBJiUC2vHlMH2lNbYB2qa";
     CDXRadarSession *session = [CDXRadarSession new];
     session.radar = [CDXRadar new];
@@ -52,11 +52,37 @@
     CDXProbe *probe = [CDXProbe new];
     probe.session = session;
     probe.url = @"http://fastlybench.cedexis.com/img/90/r20.gif";
-    probe.probeId = 1;
+    probe.probeId = CDXProbeIdCold;
     probe.ownerZoneId = 0;
     probe.ownerCustomerId = 0;
     probe.providerId = 90;
     XCTAssertTrue([probe.probeUrl isEqualToString:expectedUrl]);
+}
+
+- (void)testProbeUrlForThroughput {
+    NSString *expectedUrl = @"http://fastlybench.cedexis.com/img/90/r20.gif?rnd=14-1-18980-0-0-90-833515866-BeGkaMLVeaayaIigcaeqPjqbknRIUy0dmpdQJQ4fopdQJQ4fqmR6TzKpsHqiardFarJbDIckGidabcIfGicGbfc9JEShwHaiarcuarIVBsaakn2lGkaeyabQe2j1DhrVBJiUC2vHlMH2lNbYB2qa";
+    CDXRadarSession *session = [CDXRadarSession new];
+    session.radar = [CDXRadar new];
+    session.radar.zoneId = 1;
+    session.radar.customerId = 18980;
+    session.requestSignature = @"BeGkaMLVeaayaIigcaeqPjqbknRIUy0dmpdQJQ4fopdQJQ4fqmR6TzKpsHqiardFarJbDIckGidabcIfGicGbfc9JEShwHaiarcuarIVBsaakn2lGkaeyabQe2j1DhrVBJiUC2vHlMH2lNbYB2qa";
+    session.transactionId = 833515866;
+    CDXProbe *probe = [CDXProbe new];
+    probe.session = session;
+    probe.url = @"http://fastlybench.cedexis.com/img/90/r20.gif";
+    probe.probeId = CDXProbeIdThroughput;
+    probe.ownerZoneId = 0;
+    probe.ownerCustomerId = 0;
+    probe.providerId = 90;
+    XCTAssertTrue([probe.probeUrl isEqualToString:expectedUrl]);
+}
+
+- (void)testThroughput {
+    NSString *url = @"http://chinacache.cedexis.com/img/17/r20-100KB.png";
+    int elapsed = 430;
+    int expectedThroughput = 1860;
+    int throughput = [CDXProbe throughputForUrl:url elapsed:elapsed];
+    XCTAssertEqual(throughput, expectedThroughput);
 }
 
 @end

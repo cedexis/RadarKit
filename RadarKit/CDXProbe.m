@@ -11,13 +11,16 @@
 
 @implementation CDXProbe
 
--(id)initWithUrl:(NSString *)url
-         session:(CDXRadarSession *)session
-         probeId:(int)probeId
-      objectType:(int)objectType
-     ownerZoneId:(int)ownerZoneId
- ownerCustomerId:(int)ownerCustomerId
-      providerId:(int)providerId
+const int MILLISECONDS_IN_ONE_SECOND = 1000;
+const int BITS_IN_ONE_BYTE = 8;
+
+-(id)initWithSession:(CDXRadarSession *)session
+                 url:(NSString *)url
+             probeId:(CDXProbeId)probeId
+          objectType:(int)objectType
+         ownerZoneId:(int)ownerZoneId
+     ownerCustomerId:(int)ownerCustomerId
+          providerId:(int)providerId
 {
     if (self = [super init]) {
         _url = url;
@@ -47,7 +50,6 @@
 }
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *))handler {
-    
     NSString * probeUrl = self.probeUrl;
     [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", probeUrl]];
     NSURL * url = [NSURL URLWithString:probeUrl];
@@ -59,50 +61,48 @@
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
-            [self reportResult:4 Measurement:0 completionHandler:^(NSError *errorAtReport) {
+            [self reportWithResult:CDXProbeResultNotFound measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
                     }];
             return;
         }
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (!data || 200 != httpResponse.statusCode) {
+        const int HTTP_OK = 200;
+        if (!data || HTTP_OK != httpResponse.statusCode) {
             error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
-            [self reportResult:4 Measurement:0 completionHandler:^(NSError *errorAtReport) {
+            [self reportWithResult:CDXProbeResultNotFound measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
                     }];
             return;
         }
         NSDate *end = [NSDate date];
-        int elapsed = 1000 * [end timeIntervalSinceDate:start];
+        int elapsed = MILLISECONDS_IN_ONE_SECOND * [end timeIntervalSinceDate:start];
         [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Elapsed: %ld", (long)elapsed]];
         if (elapsed >= 4000) {
-            [self reportResult:1 Measurement:0 completionHandler:handler];
+            [self reportWithResult:CDXProbeResultServerError measurement:0 completionHandler:handler];
         }
         int measurement = elapsed;
-        if (14 == self.probeId) {
-            NSRegularExpression * expr = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)kb\\." options:NSRegularExpressionCaseInsensitive error:&error];
-            NSRange searchedRange = NSMakeRange(0, [self.url length]);
-            NSArray *matches = [expr matchesInString:self.url options:0 range:searchedRange];
-            NSTextCheckingResult * match = [matches objectAtIndex:0];
-            NSRange group1 = [match rangeAtIndex:1];
-            NSString * fileSize = [self.url substringWithRange:group1];
-            int fileSizeHint = [fileSize intValue];
-            measurement = 8 * 1000 * fileSizeHint / elapsed;
+        if (CDXProbeIdThroughput == self.probeId) {
+            measurement = [CDXProbe throughputForUrl:self.url elapsed:elapsed];
             [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Throughput: %d", measurement]];
         }
-        [self reportResult:0 Measurement:measurement completionHandler:handler];
+        [self reportWithResult:CDXProbeResultOK measurement:measurement completionHandler:handler];
     }];
     [task resume];
 }
 
-/**
- *  Builds a URL that can be used for reporting a measurement
- *
- *  @param result      Measurement result code
- *  @param measurement Throughput measured
- *
- *  @return The URL as NSString
- */
++(int)throughputForUrl:(NSString *)url elapsed:(int)elapsed {
+    NSError *error;
+    NSRegularExpression * expr = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)kb\\." options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRange searchedRange = NSMakeRange(0, [url length]);
+    NSArray *matches = [expr matchesInString:url options:0 range:searchedRange];
+    NSTextCheckingResult * match = [matches objectAtIndex:0];
+    NSRange group1 = [match rangeAtIndex:1];
+    NSString * fileSize = [url substringWithRange:group1];
+    int fileSizeHint = [fileSize intValue];
+    return BITS_IN_ONE_BYTE * MILLISECONDS_IN_ONE_SECOND * fileSizeHint / elapsed;
+}
+
 -(NSString *)reportUrlForResult:(int)result measurement:(int)measurement {
     return [NSString
         stringWithFormat:@"http://rpt.cedexis.com/f1/%@/%d/%d/%d/%d/%d/%d/1/0",
@@ -116,16 +116,9 @@
     ];
 }
 
-/**
- *  Reports the result of a measurement
- *
- *  @param result      Measurement result code
- *  @param measurement Throughput measured
- *  @param handler     Callback block
- */
--(void)reportResult:(int)result
-        Measurement:(int)measurement
-  completionHandler:(void(^)(NSError *error))handler {
+-(void)reportWithResult:(CDXProbeResult)result
+            measurement:(int)measurement
+      completionHandler:(void(^)(NSError *error))handler {
     
     NSString * reportUrl = [self reportUrlForResult:result measurement:measurement];
     [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Report URL: %@", reportUrl]];
