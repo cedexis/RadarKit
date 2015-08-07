@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL isVerbose;
 
 /**
+ *  Set to YES to always perform throughput measurements, regardless of the network type
+ */
+@property (assign, nonatomic) BOOL isThroughputMeasurementAlwaysOn;
+
+/**
  *  Initialize the CDXRadar object with your zone and customer ID. If you don't know these, they can be obtained from the Cedexis portal: https://portal.cedexis.com/ui/radar/tag This page lists the standard Cedexis Radar JavaScript tag. Your zone ID and customer ID are embedded in the URL found in the tag. For example, if the tag shows the URL //radar.cedexis.com/1/12345/radar.js, then your zone ID is 1 and your customer ID is 12345.
  *
  *  @param zoneId     You Cedexis zone

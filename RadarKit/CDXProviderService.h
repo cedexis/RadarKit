@@ -12,6 +12,6 @@
 
 @interface CDXProviderService : NSObject
 
--(void)requestSamplesForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
+-(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
 
 @end

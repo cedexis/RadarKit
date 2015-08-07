@@ -40,6 +40,8 @@
 		3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarSession.m */; };
 		3EFB785D1B72DE7200E330D4 /* CDXProbeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB785C1B72DE7200E330D4 /* CDXProbeTests.m */; };
+		3EFB78601B752B5500E330D4 /* CDXReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFB785E1B752B5500E330D4 /* CDXReachability.h */; };
+		3EFB78611B752B5500E330D4 /* CDXReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB785F1B752B5500E330D4 /* CDXReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		3E0774B11B6FF9300024C50D /* CDXRadarSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadarSession.h; sourceTree = "<group>"; };
 		3E0774B21B6FF9300024C50D /* CDXRadarSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarSession.m; sourceTree = "<group>"; };
 		3EFB785C1B72DE7200E330D4 /* CDXProbeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProbeTests.m; sourceTree = "<group>"; };
+		3EFB785E1B752B5500E330D4 /* CDXReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXReachability.h; sourceTree = "<group>"; };
+		3EFB785F1B752B5500E330D4 /* CDXReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXReachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 				3E0774AE1B6C31C10024C50D /* CDXLogger.m */,
 				3E0774B11B6FF9300024C50D /* CDXRadarSession.h */,
 				3E0774B21B6FF9300024C50D /* CDXRadarSession.m */,
+				3EFB785E1B752B5500E330D4 /* CDXReachability.h */,
+				3EFB785F1B752B5500E330D4 /* CDXReachability.m */,
 			);
 			path = RadarKit;
 			sourceTree = "<group>";
@@ -181,6 +187,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EFB78601B752B5500E330D4 /* CDXReachability.h in Headers */,
 				3E0774AF1B6C31C10024C50D /* CDXLogger.h in Headers */,
 				16FA43571AC55663000895C9 /* CDXProvider.h in Headers */,
 				3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */,
@@ -319,6 +326,7 @@
 			files = (
 				16FA43581AC55663000895C9 /* CDXProvider.m in Sources */,
 				16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */,
+				3EFB78611B752B5500E330D4 /* CDXReachability.m in Sources */,
 				16FA435C1AC56421000895C9 /* CDXProbe.m in Sources */,
 				16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */,
 				16FA43501AC54640000895C9 /* CDXProviderService.m in Sources */,
