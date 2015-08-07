@@ -11,10 +11,10 @@
 
 @implementation CDXProvider
 
--(id)initWithSample:(NSDictionary *)sample session:(CDXRadarSession *)process {
+-(id)initWithSample:(NSDictionary *)sample session:(CDXRadarSession *)session {
     if (self = [super init]) {
         _sample = sample;
-        _process = process;
+        _session = session;
     }
     return self;
 }
@@ -28,7 +28,7 @@
     NSDictionary * probesSection = [providerData objectForKey:@"p"];
     
     NSDictionary * protocolData;
-    if ([self.process.radar.protocol isEqualToString:@"https"]) {
+    if ([self.session.radar.protocol isEqualToString:@"https"]) {
         protocolData = [probesSection objectForKey:@"b"];
         if (!protocolData) {
             protocolData = [probesSection objectForKey:@"a"];
@@ -43,15 +43,15 @@
     NSDictionary * probeData;
     probeData = [protocolData objectForKey:@"a"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:1 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithSession:self.session url:probeData[@"u"] probeId:CDXProbeIdCold objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"b"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:0 objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithSession:self.session url:probeData[@"u"] probeId:CDXProbeIdRTT objectType:[probeData[@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     probeData = [protocolData objectForKey:@"c"];
     if (probeData) {
-        [probes addObject:[[CDXProbe alloc] initWithUrl:probeData[@"u"] process:self.process probeId:14 objectType:[[probeData objectForKey:@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
+        [probes addObject:[[CDXProbe alloc] initWithSession:self.session url:probeData[@"u"] probeId:CDXProbeIdThroughput objectType:[[probeData objectForKey:@"t"] intValue] ownerZoneId:ownerZoneId ownerCustomerId:ownerCustomerId providerId:providerId]];
     }
     return probes;
 }
