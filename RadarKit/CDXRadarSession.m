@@ -7,8 +7,11 @@
 //
 
 #import "CDXRadarSession.h"
+#import <UIKit/UIKit.h>
 
 @implementation CDXRadarSession
+
+const NSString *libraryVersion = @"0.2.0";
 
 - (instancetype)initWithRadar:(CDXRadar *)radar
 {
@@ -16,10 +19,19 @@
     if (self) {
         _radar = radar;
         _timestamp = [[NSDate date] timeIntervalSince1970];
-        self.transactionId = arc4random();
-        self.requestSignature = nil;
+        _transactionId = arc4random();
+        _requestSignature = nil;
+        _userAgent = [self userAgentGenerate];
     }
     return self;
+}
+    
+-(NSString *)userAgentGenerate {
+    UIDevice *device = [UIDevice currentDevice];
+    return [NSString stringWithFormat:@"RadarKit/%@ (%@; iOS %@; http://www.cedexis.com)",
+        libraryVersion,
+        device.model,
+        device.systemVersion];
 }
 
 -(void)cancel {

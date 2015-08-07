@@ -24,6 +24,8 @@
         _zoneId = zoneId;
         _customerId = customerId;
         _protocol = protocol;
+        _isThroughputMeasurementAlwaysOn = NO;
+        _isVerbose = NO;
     }
     return self;
 }

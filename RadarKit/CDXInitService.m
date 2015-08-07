@@ -47,14 +47,15 @@ const NSString *baseUrl = @"init.cedexis-radar.net";
     ];
 }
 
--(void)getSignatureForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSString *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self urlWithProcess:process]];
+-(void)getSignatureForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSString *, NSError *))handler {
+    NSURL * url = [NSURL URLWithString:[self urlWithProcess:session]];
     [[CDXLogger sharedInstance] log:url.description];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": session.userAgent };
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if ((nil != data) && (200 == httpResponse.statusCode)) {

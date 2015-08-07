@@ -9,6 +9,8 @@
 #import "CDXProbe.h"
 #import "CDXLogger.h"
 
+#import "CDXReachability.h"
+
 @implementation CDXProbe
 
 const int MILLISECONDS_IN_ONE_SECOND = 1000;
@@ -50,6 +52,11 @@ const int BITS_IN_ONE_BYTE = 8;
 }
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *))handler {
+    if (self.probeId == CDXProbeIdThroughput && !self.session.radar.isThroughputMeasurementAlwaysOn && ![self isUsingWifi]) {
+        [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe skipped because device is not on WiFi"]];
+        handler(nil);
+        return;
+    }
     NSString * probeUrl = self.probeUrl;
     [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", probeUrl]];
     NSURL * url = [NSURL URLWithString:probeUrl];
@@ -58,8 +65,9 @@ const int BITS_IN_ONE_BYTE = 8;
     timeoutInterval:20.0 ];
     
     NSDate *start = [NSDate date];
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             [self reportWithResult:CDXProbeResultNotFound measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
@@ -128,8 +136,9 @@ const int BITS_IN_ONE_BYTE = 8;
         requestWithURL:url
            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
        timeoutInterval:6.0 ];
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (!data || (200 != httpResponse.statusCode)) {
@@ -141,6 +150,13 @@ const int BITS_IN_ONE_BYTE = 8;
         }
     }];
     [task resume];
+}
+
+-(BOOL)isUsingWifi {
+    CDXReachability *reachability = [CDXReachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    return status == ReachableViaWiFi;
 }
 
 @end

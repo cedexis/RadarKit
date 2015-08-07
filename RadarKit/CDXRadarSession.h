@@ -17,6 +17,7 @@
 @property (assign, nonatomic) unsigned long timestamp;
 @property (assign, nonatomic) unsigned long transactionId;
 @property (strong, nonatomic) NSString * requestSignature;
+@property (strong, nonatomic, readonly) NSString *userAgent;
 
 - (instancetype)initWithRadar:(CDXRadar *)radar;
 

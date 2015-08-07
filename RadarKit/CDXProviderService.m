@@ -11,22 +11,24 @@
 
 @implementation CDXProviderService
 
--(NSString *) urlForProcess:(CDXRadarSession *)process {
-    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1",
-        process.radar.protocol,
-        process.radar.zoneId,
-        process.radar.customerId,
-        process.timestamp,
+-(NSString *) urlForSession:(CDXRadarSession *)session {
+    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1&t=1",
+        session.radar.protocol,
+        session.radar.zoneId,
+        session.radar.customerId,
+        session.timestamp,
         [self genRandStringLength:20]
     ];
 }
 
--(void)requestSamplesForSession:(CDXRadarSession *)process completionHandler:(void(^)(NSArray *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self urlForProcess:process]];
+-(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *, NSError *))handler {
+    NSURL * url = [NSURL URLWithString:[self urlForSession:session]];
     [[CDXLogger sharedInstance] log:url.description];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": session.userAgent };
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSMutableArray *samples;
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
