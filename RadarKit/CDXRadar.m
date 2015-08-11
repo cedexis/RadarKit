@@ -62,7 +62,11 @@
                 [providers addObject:provider];
             }
             [self measureWithProviders:providers completionHandler:^(NSError *error) {
-                [[CDXLogger sharedInstance] log:@"Radar session complete"];
+                if (session.wasCancelled) {
+                    [[CDXLogger sharedInstance] log:@"Radar session cancelled"];
+                } else {
+                    [[CDXLogger sharedInstance] log:@"Radar session complete"];
+                }
                 if (handler) {
                     handler(error);
                 }

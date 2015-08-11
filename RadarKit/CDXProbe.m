@@ -67,7 +67,7 @@ const int BITS_IN_ONE_BYTE = 8;
     NSDate *start = [NSDate date];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
-    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    self.session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             [self reportWithResult:CDXProbeResultNotFound measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
@@ -96,7 +96,7 @@ const int BITS_IN_ONE_BYTE = 8;
         }
         [self reportWithResult:CDXProbeResultOK measurement:measurement completionHandler:handler];
     }];
-    [task resume];
+    [self.session.currentTask resume];
 }
 
 +(int)throughputForUrl:(NSString *)url elapsed:(int)elapsed {
@@ -138,7 +138,7 @@ const int BITS_IN_ONE_BYTE = 8;
        timeoutInterval:6.0 ];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
-    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    self.session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (!data || (200 != httpResponse.statusCode)) {
@@ -149,7 +149,7 @@ const int BITS_IN_ONE_BYTE = 8;
             handler(error);
         }
     }];
-    [task resume];
+    [self.session.currentTask resume];
 }
 
 -(BOOL)isUsingWifi {
