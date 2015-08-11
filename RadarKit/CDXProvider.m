@@ -19,8 +19,7 @@
     return self;
 }
 
--(NSMutableArray *)probesWithSample:(NSDictionary *)sample
-{
+-(NSMutableArray *)probes {
     NSDictionary * providerData = [self.sample objectForKey:@"p"];
     int ownerZoneId = [[providerData objectForKey:@"z"] intValue];
     int ownerCustomerId = [[providerData objectForKey:@"c"] intValue];
@@ -57,7 +56,7 @@
 }
 
 -(void)measureWithCompletionHandler:(void (^)(NSError *))handler {
-    NSMutableArray *probes = [self probesWithSample:self.sample];
+    NSMutableArray *probes = self.probes;
     [self measureWithProbes:probes completionHandler:handler];
 }
 

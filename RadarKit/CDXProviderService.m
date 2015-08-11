@@ -11,18 +11,18 @@
 
 @implementation CDXProviderService
 
--(NSString *) urlForSession:(CDXRadarSession *)session {
++(NSString *) urlForSession:(CDXRadarSession *)session {
     return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1&t=1",
         session.radar.protocol,
         session.radar.zoneId,
         session.radar.customerId,
         session.timestamp,
-        [self genRandStringLength:20]
+        [self randomStringWithLength:20]
     ];
 }
 
 -(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self urlForSession:session]];
+    NSURL * url = [NSURL URLWithString:[CDXProviderService urlForSession:session]];
     [[CDXLogger sharedInstance] log:url.description];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
@@ -48,10 +48,10 @@
 }
 
 // Generates alpha-numeric-random string
-- (NSString *)genRandStringLength:(int)len {
++ (NSString *)randomStringWithLength:(int)length {
     static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    for (int i=0; i<len; i++) {
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
+    for (int i = 0; i < length; i++) {
         [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
     }
     return randomString;

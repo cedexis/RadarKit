@@ -17,6 +17,8 @@
 -(instancetype)initWithSample:(NSDictionary *)sample
             session:(CDXRadarSession *)process;
 
+-(NSMutableArray *)probes;
+
 -(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
 
 @end

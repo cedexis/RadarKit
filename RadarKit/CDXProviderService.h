@@ -14,4 +14,7 @@
 
 -(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
 
++ (NSString *)urlForSession:(CDXRadarSession *)session;
++ (NSString *)randomStringWithLength:(int)len;
+
 @end
