@@ -40,6 +40,7 @@
 		3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarSession.m */; };
 		3E5928DA1B7925FA0033ABCA /* CDXProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */; };
+		3E5928DC1B794E360033ABCA /* CDXProviderServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */; };
 		3E8549021B75A8CA005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
 		3E8549111B75ACA1005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
 		3E8549141B75AD1C005D2A4E /* CDXReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8549121B75AD1C005D2A4E /* CDXReachability.h */; };
@@ -98,6 +99,7 @@
 		3E0774B11B6FF9300024C50D /* CDXRadarSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadarSession.h; sourceTree = "<group>"; };
 		3E0774B21B6FF9300024C50D /* CDXRadarSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarSession.m; sourceTree = "<group>"; };
 		3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderTests.m; sourceTree = "<group>"; };
+		3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderServiceTests.m; sourceTree = "<group>"; };
 		3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E8549121B75AD1C005D2A4E /* CDXReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXReachability.h; sourceTree = "<group>"; };
 		3E8549131B75AD1C005D2A4E /* CDXReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXReachability.m; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				16FA43281AC51D12000895C9 /* Supporting Files */,
 				3EFB785C1B72DE7200E330D4 /* CDXProbeTests.m */,
 				3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */,
+				3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */,
 			);
 			path = RadarKitTests;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			files = (
 				3E5928DA1B7925FA0033ABCA /* CDXProviderTests.m in Sources */,
 				3EFB785D1B72DE7200E330D4 /* CDXProbeTests.m in Sources */,
+				3E5928DC1B794E360033ABCA /* CDXProviderServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
