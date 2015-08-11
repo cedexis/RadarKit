@@ -11,6 +11,7 @@
 
 @interface CDXInitService : NSObject<NSXMLParserDelegate>
 
--(void)getSignatureForSession:(CDXRadarSession *)radarProcess completionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
++ (NSString *)urlWithSession:(CDXRadarSession *)session;
+- (void)getSignatureForSession:(CDXRadarSession *)radarProcess completionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
 
 @end

@@ -22,33 +22,33 @@ const int majorVersion = 0;
 const int minorVersion = 2;
 const NSString *baseUrl = @"init.cedexis-radar.net";
 
--(NSString *) urlWithProcess:(CDXRadarSession *)process {
++(NSString *) urlWithSession:(CDXRadarSession *)session {
     NSString * flag = @"i";
-    if ([process.radar.protocol isEqualToString:@"https"]) {
+    if ([session.radar.protocol isEqualToString:@"https"]) {
         flag = @"s";
     }
     return [NSString stringWithFormat:@"%@://i1-io-%d-%d-%d-%d-%lu-%@.%@/i1/%lu/%lu/xml?seed=i1-io-%d-%d-%d-%d-%lu-%@",
-            process.radar.protocol,
+            session.radar.protocol,
             majorVersion,
             minorVersion,
-            process.radar.zoneId,
-            process.radar.customerId,
-            process.transactionId,
+            session.radar.zoneId,
+            session.radar.customerId,
+            session.transactionId,
             flag,
             baseUrl,
-            process.timestamp,
-            process.transactionId,
+            session.timestamp,
+            session.transactionId,
             majorVersion,
             minorVersion,
-            process.radar.zoneId,
-            process.radar.customerId,
-            process.transactionId,
+            session.radar.zoneId,
+            session.radar.customerId,
+            session.transactionId,
             flag
     ];
 }
 
 -(void)getSignatureForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSString *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[self urlWithProcess:session]];
+    NSURL * url = [NSURL URLWithString:[CDXInitService urlWithSession:session]];
     [[CDXLogger sharedInstance] log:url.description];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url
