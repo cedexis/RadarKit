@@ -42,6 +42,7 @@
 		3E5928DA1B7925FA0033ABCA /* CDXProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */; };
 		3E5928DC1B794E360033ABCA /* CDXProviderServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */; };
 		3E5929141B7A6AAB0033ABCA /* CDXInitServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5929131B7A6AAB0033ABCA /* CDXInitServiceTests.m */; };
+		3E5929161B7A6FBD0033ABCA /* CDXRadarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5929151B7A6FBD0033ABCA /* CDXRadarTests.m */; };
 		3E8549021B75A8CA005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
 		3E8549111B75ACA1005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
 		3E8549141B75AD1C005D2A4E /* CDXReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8549121B75AD1C005D2A4E /* CDXReachability.h */; };
@@ -102,6 +103,7 @@
 		3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderTests.m; sourceTree = "<group>"; };
 		3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderServiceTests.m; sourceTree = "<group>"; };
 		3E5929131B7A6AAB0033ABCA /* CDXInitServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXInitServiceTests.m; sourceTree = "<group>"; };
+		3E5929151B7A6FBD0033ABCA /* CDXRadarTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarTests.m; sourceTree = "<group>"; };
 		3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E8549121B75AD1C005D2A4E /* CDXReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXReachability.h; sourceTree = "<group>"; };
 		3E8549131B75AD1C005D2A4E /* CDXReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXReachability.m; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */,
 				3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */,
 				3E5929131B7A6AAB0033ABCA /* CDXInitServiceTests.m */,
+				3E5929151B7A6FBD0033ABCA /* CDXRadarTests.m */,
 			);
 			path = RadarKitTests;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			files = (
 				3E5928DA1B7925FA0033ABCA /* CDXProviderTests.m in Sources */,
 				3EFB785D1B72DE7200E330D4 /* CDXProbeTests.m in Sources */,
+				3E5929161B7A6FBD0033ABCA /* CDXRadarTests.m in Sources */,
 				3E5928DC1B794E360033ABCA /* CDXProviderServiceTests.m in Sources */,
 				3E5929141B7A6AAB0033ABCA /* CDXInitServiceTests.m in Sources */,
 			);
