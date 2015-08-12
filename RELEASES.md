@@ -1,5 +1,11 @@
 # RELEASES
 
+## 0.2.0
+
+* Allow throughput measurements on WiFi only
+* Provide ability to stop a Radar session
+* Add basic unit tests
+
 ## 0.1.2
 
 * Add target to compile the library into a .framework file.

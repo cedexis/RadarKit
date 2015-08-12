@@ -22,6 +22,7 @@ const NSString *libraryVersion = @"0.2.0";
         _transactionId = arc4random();
         _requestSignature = nil;
         _userAgent = [self userAgentGenerate];
+        _wasCancelled = NO;
     }
     return self;
 }
@@ -35,7 +36,8 @@ const NSString *libraryVersion = @"0.2.0";
 }
 
 -(void)cancel {
-    @throw @"Not implemented";
+    _wasCancelled = YES;
+    [self.currentTask cancel];
 }
 
 @end

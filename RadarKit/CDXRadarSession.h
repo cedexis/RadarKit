@@ -18,6 +18,8 @@
 @property (assign, nonatomic) unsigned long transactionId;
 @property (strong, nonatomic) NSString * requestSignature;
 @property (strong, nonatomic, readonly) NSString *userAgent;
+@property (strong, nonatomic) NSURLSessionDataTask *currentTask;
+@property (assign, nonatomic, readonly) BOOL wasCancelled;
 
 - (instancetype)initWithRadar:(CDXRadar *)radar;
 
