@@ -9,6 +9,13 @@ RadarKit is available on [CocoaPods](http://www.cocoapods.org). Add the followin
 
     pod 'RadarKit'
 
+## Installation with the .framework file
+
+1. Download the latest framework file from the [Releases section](https://github.com/cedexis/RadarKit/releases).
+2. Unzip the file by double-clicking on it.
+3. Drag the RadarKit.framework file and drop it into your project.
+4. In XCode, select your project's name > Build Phases > Link Binary With Libraries > Add the SystemConfiguration.framework (this is a dependency).
+
 ## Manual installation
 
 The first step is to add the RadarKit project into your own project. There are two principle ways to do that:

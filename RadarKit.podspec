@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name          = "RadarKit"
-    s.version       = "0.1.2"
+    s.version       = "0.2.0"
     s.summary       = "A Cedexis Radar client for iOS."
     s.homepage      = "https://github.com/cedexis/radarkit"
     s.license       = { :type => 'MIT', :text => 'The MIT License (MIT)
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
     s.platform      = :ios, '7.0'
     s.requires_arc  = true
-    s.frameworks    = ['Foundation']
+    s.frameworks    = ['Foundation', 'SystemConfiguration']
 
     s.source_files  = "RadarKit/*.{h,m}"
 end
