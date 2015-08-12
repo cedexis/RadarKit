@@ -82,7 +82,7 @@ CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1
                                           protocol:@"http"
 ];
 ```
-If you'd like to execute code when the background task is finished, you can use:
+If you'd like to execute code when the Radar session is finished, you can use:
 
 ```Objective-C
 [radar runInBackgroundWithCompletionHandler:^(NSError *error) {
@@ -98,6 +98,13 @@ To make RadarKit log all activity to the console, including errors and successfu
 
 ```Objective-C
 radar.isVerbose = YES;
+```
+
+If you need to cancel the Radar session for whatever reason, you can do the following:
+
+```Objective-C
+CDXRadarSession *session = [radar runInBackground];
+[session cancel]; // Add this line at the exact point you'd like the session to stop
 ```
 
 Be sure to supply your own Cedexis zone and customer IDs as arguments to the Radar class's
