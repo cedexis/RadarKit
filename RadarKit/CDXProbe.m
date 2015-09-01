@@ -8,8 +8,7 @@
 
 #import "CDXProbe.h"
 #import "CDXLogger.h"
-
-#import "CDXReachability.h"
+@import CoreTelephony.CTTelephonyNetworkInfo;
 
 @implementation CDXProbe
 
@@ -52,7 +51,7 @@ const int BITS_IN_ONE_BYTE = 8;
 }
 
 -(void)measureWithCompletionHandler:(void(^)(NSError *))handler {
-    if (self.probeId == CDXProbeIdThroughput && !self.session.radar.isThroughputMeasurementAlwaysOn && ![self isUsingWifi]) {
+    if (self.probeId == CDXProbeIdThroughput && !self.session.radar.isThroughputMeasurementAlwaysOn && ![self.session.networkType isEqualToString:@"wifi"]) {
         [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe skipped because device is not on WiFi"]];
         handler(nil);
         return;
@@ -138,6 +137,8 @@ const int BITS_IN_ONE_BYTE = 8;
        timeoutInterval:6.0 ];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
+    configuration.HTTPAdditionalHeaders = @{ @"Cedexis-iOS-Network-Type": self.session.networkType };
+    configuration.HTTPAdditionalHeaders = @{ @"Cedexis-iOS-Network-Subtype": self.session.networkSubtype };
     self.session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
@@ -150,13 +151,6 @@ const int BITS_IN_ONE_BYTE = 8;
         }
     }];
     [self.session.currentTask resume];
-}
-
--(BOOL)isUsingWifi {
-    CDXReachability *reachability = [CDXReachability reachabilityForInternetConnection];
-    [reachability startNotifier];
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    return status == ReachableViaWiFi;
 }
 
 @end
