@@ -25,7 +25,6 @@
 		16FA43241AC51D12000895C9 /* libRadarKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43181AC51D12000895C9 /* libRadarKit.a */; };
 		16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43401AC5210B000895C9 /* CDXRadar.m */; };
 		16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43431AC529F5000895C9 /* CDXInitService.m */; };
-		16FA43471AC52CD6000895C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43461AC52CD6000895C9 /* Foundation.framework */; };
 		16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43451AC52C33000895C9 /* RadarKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		16FA434B1AC52DB0000895C9 /* CDXInitService.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA43421AC529F5000895C9 /* CDXInitService.h */; };
 		16FA434C1AC52DB9000895C9 /* CDXRadar.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FA433F1AC5210B000895C9 /* CDXRadar.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,14 +38,13 @@
 		3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774AE1B6C31C10024C50D /* CDXLogger.m */; };
 		3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarSession.m */; };
+		3E3B93FD1B9524ED0046D9AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43461AC52CD6000895C9 /* Foundation.framework */; };
+		3E3B93FF1B9524F50046D9AB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */; };
+		3E3B94001B960DE80046D9AB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */; };
 		3E5928DA1B7925FA0033ABCA /* CDXProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */; };
 		3E5928DC1B794E360033ABCA /* CDXProviderServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */; };
 		3E5929141B7A6AAB0033ABCA /* CDXInitServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5929131B7A6AAB0033ABCA /* CDXInitServiceTests.m */; };
 		3E5929161B7A6FBD0033ABCA /* CDXRadarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5929151B7A6FBD0033ABCA /* CDXRadarTests.m */; };
-		3E8549021B75A8CA005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
-		3E8549111B75ACA1005D2A4E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */; };
-		3E8549141B75AD1C005D2A4E /* CDXReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8549121B75AD1C005D2A4E /* CDXReachability.h */; };
-		3E8549151B75AD1C005D2A4E /* CDXReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8549131B75AD1C005D2A4E /* CDXReachability.m */; };
 		3EFB785D1B72DE7200E330D4 /* CDXProbeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB785C1B72DE7200E330D4 /* CDXProbeTests.m */; };
 /* End PBXBuildFile section */
 
@@ -100,13 +98,11 @@
 		3E0774AE1B6C31C10024C50D /* CDXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXLogger.m; sourceTree = "<group>"; };
 		3E0774B11B6FF9300024C50D /* CDXRadarSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadarSession.h; sourceTree = "<group>"; };
 		3E0774B21B6FF9300024C50D /* CDXRadarSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarSession.m; sourceTree = "<group>"; };
+		3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderTests.m; sourceTree = "<group>"; };
 		3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderServiceTests.m; sourceTree = "<group>"; };
 		3E5929131B7A6AAB0033ABCA /* CDXInitServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXInitServiceTests.m; sourceTree = "<group>"; };
 		3E5929151B7A6FBD0033ABCA /* CDXRadarTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarTests.m; sourceTree = "<group>"; };
-		3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3E8549121B75AD1C005D2A4E /* CDXReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXReachability.h; sourceTree = "<group>"; };
-		3E8549131B75AD1C005D2A4E /* CDXReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXReachability.m; sourceTree = "<group>"; };
 		3EFB785C1B72DE7200E330D4 /* CDXProbeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProbeTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8549021B75A8CA005D2A4E /* SystemConfiguration.framework in Frameworks */,
-				16FA43471AC52CD6000895C9 /* Foundation.framework in Frameworks */,
+				3E3B93FF1B9524F50046D9AB /* CoreTelephony.framework in Frameworks */,
+				3E3B93FD1B9524ED0046D9AB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8549111B75ACA1005D2A4E /* SystemConfiguration.framework in Frameworks */,
+				3E3B94001B960DE80046D9AB /* CoreTelephony.framework in Frameworks */,
 				16FA43241AC51D12000895C9 /* libRadarKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +131,7 @@
 		16FA430F1AC51D12000895C9 = {
 			isa = PBXGroup;
 			children = (
-				3E8549011B75A8CA005D2A4E /* SystemConfiguration.framework */,
+				3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */,
 				16FA43461AC52CD6000895C9 /* Foundation.framework */,
 				16FA43321AC51D87000895C9 /* README.md */,
 				16FA431A1AC51D12000895C9 /* RadarKit */,
@@ -171,8 +167,6 @@
 				3E0774AE1B6C31C10024C50D /* CDXLogger.m */,
 				3E0774B11B6FF9300024C50D /* CDXRadarSession.h */,
 				3E0774B21B6FF9300024C50D /* CDXRadarSession.m */,
-				3E8549121B75AD1C005D2A4E /* CDXReachability.h */,
-				3E8549131B75AD1C005D2A4E /* CDXReachability.m */,
 			);
 			path = RadarKit;
 			sourceTree = "<group>";
@@ -207,7 +201,6 @@
 			files = (
 				3E0774AF1B6C31C10024C50D /* CDXLogger.h in Headers */,
 				16FA43571AC55663000895C9 /* CDXProvider.h in Headers */,
-				3E8549141B75AD1C005D2A4E /* CDXReachability.h in Headers */,
 				3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */,
 				16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */,
 				16FA434C1AC52DB9000895C9 /* CDXRadar.h in Headers */,
@@ -346,7 +339,6 @@
 				16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */,
 				16FA435C1AC56421000895C9 /* CDXProbe.m in Sources */,
 				16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */,
-				3E8549151B75AD1C005D2A4E /* CDXReachability.m in Sources */,
 				16FA43501AC54640000895C9 /* CDXProviderService.m in Sources */,
 				3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */,
 				3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */,
