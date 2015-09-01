@@ -14,7 +14,7 @@ RadarKit is available on [CocoaPods](http://www.cocoapods.org). Add the followin
 1. Download the latest framework file from the [Releases section](https://github.com/cedexis/RadarKit/releases).
 2. Unzip the file by double-clicking on it.
 3. Drag the RadarKit.framework file and drop it into your project.
-4. In XCode, select your project's name > Build Phases > Link Binary With Libraries > Add the SystemConfiguration.framework (this is a dependency).
+4. In XCode, select your project's name > Build Phases > Link Binary With Libraries > Add the CoreTelephony.framework (this is a dependency).
 
 ## Manual installation
 
