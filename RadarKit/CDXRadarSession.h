@@ -20,6 +20,8 @@
 @property (strong, nonatomic, readonly) NSString *userAgent;
 @property (strong, nonatomic) NSURLSessionDataTask *currentTask;
 @property (assign, nonatomic, readonly) BOOL wasCancelled;
+@property (strong, nonatomic) NSString *networkType;
+@property (strong, nonatomic) NSString *networkSubtype;
 
 - (instancetype)initWithRadar:(CDXRadar *)radar;
 
