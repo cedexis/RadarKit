@@ -8,6 +8,7 @@
 
 #import "CDXRadarSession.h"
 #import <UIKit/UIKit.h>
+@import CoreTelephony.CTTelephonyNetworkInfo;
 
 @implementation CDXRadarSession
 
@@ -23,6 +24,12 @@ const NSString *libraryVersion = @"0.2.0";
         _requestSignature = nil;
         _userAgent = [self userAgentGenerate];
         _wasCancelled = NO;
+        _networkSubtype = [self currentNetworkSubtype];
+        if ([_networkSubtype isEqualToString:@"wifi"]) {
+            _networkType = @"wifi";
+        } else {
+            _networkType = @"cellular";
+        }
     }
     return self;
 }
@@ -38,6 +45,16 @@ const NSString *libraryVersion = @"0.2.0";
 -(void)cancel {
     _wasCancelled = YES;
     [self.currentTask cancel];
+}
+
+-(NSString *)currentNetworkSubtype {
+    CTTelephonyNetworkInfo *networkInfo = [CTTelephonyNetworkInfo new];
+    NSString *subtype = networkInfo.currentRadioAccessTechnology;
+    if (subtype) {
+        return subtype;
+    } else {
+        return @"wifi";
+    }
 }
 
 @end
