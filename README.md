@@ -25,7 +25,7 @@ The first step is to add the RadarKit project into your own project. There are t
 
 ### Downloading from Github
 
-You can download the code directly from Gitbug.  From your project's' root directory:
+You can download the code directly from Github.  From your project root directory:
 
 ```bash
 $ mkdir -p Vendor/RadarKit
