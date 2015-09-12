@@ -74,18 +74,18 @@ Then at the exact point where you'd like to _schedule_ a Radar session, add the 
 
 ```Objective-C
 CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
-                                        customerId:XXXXX <-- Replace this with your own Cedexis customer ID.
+                                        customerId:XXXXX // <-- Replace this with your own Cedexis customer ID.
 ];
 [radar runInBackground];
 ```
 
 That's basically all there is to it.
 
-The default protocol used by RadarKit is HTTPS. If you need to use HTTP, you can set it up using the alternate initialization:
+By default, RadarKit only measures probes set up with HTTPS URLs.  If you need to measure probes having HTTP URLs, there is an alternate initialization that includes a *protocol* argument, which should be set to "http":
 
 ```Objective-C
 CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1 
-                                        customerId:XXXXX <-- Replace this with your own Cedexis customer ID.
+                                        customerId:XXXXX // <-- Replace this with your own Cedexis customer ID.
                                           protocol:@"http"
 ];
 ```
