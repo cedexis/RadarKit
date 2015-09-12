@@ -87,6 +87,16 @@ CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1
                                           protocol:@"http"
 ];
 ```
+
+Be sure to supply your own Cedexis zone and customer IDs as arguments to the CDXRadar class
+initializers.
+
+If you don't know these, they can be obtained from the Cedexis portal at the following URL:
+https://portal.cedexis.com/ui/radar/tag. This page lists the standard Cedexis Radar
+JavaScript tag. Your zone ID and customer ID are embedded in the URL found in the tag.
+For example, if the tag shows the URL `//radar.cedexis.com/1/12345/radar.js`, then your
+zone ID is `1` and your customer ID is `12345`.
+
 If you'd like to execute code when the Radar session is finished, you can use:
 
 ```Objective-C
@@ -111,15 +121,6 @@ If you need to cancel the Radar session for whatever reason, you can do the foll
 CDXRadarSession *session = [radar runInBackground];
 [session cancel]; // Add this line at the exact point you'd like the session to stop
 ```
-
-Be sure to supply your own Cedexis zone and customer IDs as arguments to the Radar class's
-runForZone:AndCustomerId method.
-
-If you don't know these, they can be obtained from the Cedexis portal at the following URL:
-https://portal.cedexis.com/ui/radar/tag. This page lists the standard Cedexis Radar
-JavaScript tag. Your zone ID and customer ID are embedded in the URL found in the tag.
-For example, if the tag shows the URL `//radar.cedexis.com/1/12345/radar.js`, then your
-zone ID is `1` and your customer ID is `12345`.
 
 ## Sample Application
 
