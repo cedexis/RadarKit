@@ -79,8 +79,6 @@ CDXRadar *radar = [[CDXRadar alloc] initWithZoneId:1
 [radar runInBackground];
 ```
 
-That's basically all there is to it.
-
 By default, RadarKit only measures probes set up with HTTPS URLs.  If you need to measure probes having HTTP URLs, there is an alternate initialization that includes a *protocol* argument, which should be set to "http":
 
 ```Objective-C
