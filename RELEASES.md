@@ -1,5 +1,9 @@
 # RELEASES
 
+## 0.2.2
+
+* Use radar protocol on reports
+
 ## 0.2.1
 
 * Send network type headers on reports.
