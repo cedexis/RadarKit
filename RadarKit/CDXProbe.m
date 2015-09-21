@@ -112,7 +112,8 @@ const int BITS_IN_ONE_BYTE = 8;
 
 -(NSString *)reportUrlForResult:(int)result measurement:(int)measurement {
     return [NSString
-        stringWithFormat:@"http://rpt.cedexis.com/f1/%@/%d/%d/%d/%d/%d/%d/1/0",
+        stringWithFormat:@"%@://rpt.cedexis.com/f1/%@/%d/%d/%d/%d/%d/%d/1/0",
+        self.session.radar.protocol,
         self.session.requestSignature,
         self.ownerZoneId,
         self.ownerCustomerId,
