@@ -100,6 +100,7 @@
 		3E0774B11B6FF9300024C50D /* CDXRadarSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXRadarSession.h; sourceTree = "<group>"; };
 		3E0774B21B6FF9300024C50D /* CDXRadarSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXRadarSession.m; sourceTree = "<group>"; };
 		3E13B4A91BB0BF5600C182B7 /* RELEASES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = RELEASES.md; sourceTree = "<group>"; };
+		3E13B4AB1BB0C10400C182B7 /* RadarKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadarKit.podspec; sourceTree = "<group>"; };
 		3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3E5928D91B7925FA0033ABCA /* CDXProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderTests.m; sourceTree = "<group>"; };
 		3E5928DB1B794E360033ABCA /* CDXProviderServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXProviderServiceTests.m; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		16FA430F1AC51D12000895C9 = {
 			isa = PBXGroup;
 			children = (
+				3E13B4AB1BB0C10400C182B7 /* RadarKit.podspec */,
 				3E13B4A91BB0BF5600C182B7 /* RELEASES.md */,
 				3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */,
 				16FA43461AC52CD6000895C9 /* Foundation.framework */,
