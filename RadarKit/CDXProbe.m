@@ -60,8 +60,9 @@ const int BITS_IN_ONE_BYTE = 8;
     [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Probe URL: %@", probeUrl]];
     NSURL * url = [NSURL URLWithString:probeUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
-        cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-    timeoutInterval:20.0 ];
+                                             cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                         timeoutInterval:20.0
+                             ];
     
     NSDate *start = [NSDate date];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -137,9 +138,11 @@ const int BITS_IN_ONE_BYTE = 8;
            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
        timeoutInterval:6.0 ];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.session.userAgent };
-    configuration.HTTPAdditionalHeaders = @{ @"Cedexis-iOS-Network-Type": self.session.networkType };
-    configuration.HTTPAdditionalHeaders = @{ @"Cedexis-iOS-Network-Subtype": self.session.networkSubtype };
+    configuration.HTTPAdditionalHeaders = @{
+                                            @"User-Agent": self.session.userAgent,
+                                            @"Cedexis-iOS-Network-Type": self.session.networkType,
+                                            @"Cedexis-iOS-Network-Subtype": self.session.networkSubtype
+                                            };
     self.session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;

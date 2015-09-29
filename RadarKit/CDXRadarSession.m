@@ -12,7 +12,7 @@
 
 @implementation CDXRadarSession
 
-const NSString *libraryVersion = @"0.2.0";
+const NSString *libraryVersion = @"0.3.0";
 
 - (instancetype)initWithRadar:(CDXRadar *)radar
 {

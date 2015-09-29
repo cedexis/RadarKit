@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CDXRadarSession.h"
+#import "CDXImpact.h"
 
 @class CDXRadarSession;
 
