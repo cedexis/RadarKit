@@ -65,7 +65,13 @@ const NSString *baseUrl = @"init.cedexis-radar.net";
             }
             else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (init)"];
-                error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+                NSDictionary *userInfo = nil;
+                if (data) {
+                    userInfo = @{ @"data": data };
+                }
+                error = [NSError errorWithDomain:@"RadarKit"
+                                            code:httpResponse.statusCode
+                                        userInfo:userInfo];
             }
         }
         if (handler) {

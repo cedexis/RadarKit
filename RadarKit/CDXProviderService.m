@@ -37,7 +37,13 @@
                 [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", (unsigned long)samples.count]];
             } else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (ProbeServer)"];
-                error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+                NSDictionary *userInfo = nil;
+                if (data) {
+                    userInfo = @{ @"data": data };
+                }
+                error = [NSError errorWithDomain:@"RadarKit"
+                                            code:httpResponse.statusCode
+                                        userInfo:userInfo];
             }
         }
         if (handler) {

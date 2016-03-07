@@ -38,13 +38,13 @@
 		3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774AE1B6C31C10024C50D /* CDXLogger.m */; };
 		3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarSession.m */; };
-		3E13B4AA1BB0BF5600C182B7 /* RELEASES.md in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4A91BB0BF5600C182B7 /* RELEASES.md */; settings = {ASSET_TAGS = (); }; };
+		3E13B4AA1BB0BF5600C182B7 /* RELEASES.md in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4A91BB0BF5600C182B7 /* RELEASES.md */; };
 		3E13B4BD1BB321DD00C182B7 /* CDXImpact.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4BB1BB321DD00C182B7 /* CDXImpact.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E13B4BE1BB321DD00C182B7 /* CDXImpact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4BC1BB321DD00C182B7 /* CDXImpact.m */; settings = {ASSET_TAGS = (); }; };
-		3E13B4C11BB32A8D00C182B7 /* CDXImpactMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4BF1BB32A8D00C182B7 /* CDXImpactMeasurement.h */; settings = {ASSET_TAGS = (); }; };
-		3E13B4C21BB32A8D00C182B7 /* CDXImpactMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4C01BB32A8D00C182B7 /* CDXImpactMeasurement.m */; settings = {ASSET_TAGS = (); }; };
-		3E13B4C91BB5CDE300C182B7 /* CDXImpactCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4C71BB5CDE300C182B7 /* CDXImpactCategory.h */; settings = {ASSET_TAGS = (); }; };
-		3E13B4CA1BB5CDE300C182B7 /* CDXImpactCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4C81BB5CDE300C182B7 /* CDXImpactCategory.m */; settings = {ASSET_TAGS = (); }; };
+		3E13B4BE1BB321DD00C182B7 /* CDXImpact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4BC1BB321DD00C182B7 /* CDXImpact.m */; };
+		3E13B4C11BB32A8D00C182B7 /* CDXImpactMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4BF1BB32A8D00C182B7 /* CDXImpactMeasurement.h */; };
+		3E13B4C21BB32A8D00C182B7 /* CDXImpactMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4C01BB32A8D00C182B7 /* CDXImpactMeasurement.m */; };
+		3E13B4C91BB5CDE300C182B7 /* CDXImpactCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4C71BB5CDE300C182B7 /* CDXImpactCategory.h */; };
+		3E13B4CA1BB5CDE300C182B7 /* CDXImpactCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4C81BB5CDE300C182B7 /* CDXImpactCategory.m */; };
 		3E3B93FD1B9524ED0046D9AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43461AC52CD6000895C9 /* Foundation.framework */; };
 		3E3B93FF1B9524F50046D9AB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */; };
 		3E3B94001B960DE80046D9AB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */; };
@@ -282,7 +282,7 @@
 		16FA43101AC51D12000895C9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Cedexis;
 				TargetAttributes = {
 					16FA43171AC51D12000895C9 = {
@@ -423,6 +423,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Javier Rosas (2L2378RRSR)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -514,6 +515,7 @@
 				);
 				INFOPLIST_FILE = RadarKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cedexis.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -527,6 +529,7 @@
 				);
 				INFOPLIST_FILE = RadarKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cedexis.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

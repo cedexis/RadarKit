@@ -77,7 +77,13 @@ const int BITS_IN_ONE_BYTE = 8;
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         const int HTTP_OK = 200;
         if (!data || HTTP_OK != httpResponse.statusCode) {
-            error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+            NSDictionary *userInfo = nil;
+            if (data) {
+                userInfo = @{ @"data": data };
+            }
+            error = [NSError errorWithDomain:@"RadarKit"
+                                        code:httpResponse.statusCode
+                                    userInfo:userInfo];
             [self reportWithResult:CDXProbeResultNotFound measurement:0 completionHandler:^(NSError *errorAtReport) {
                         handler(error);
                     }];
@@ -147,7 +153,13 @@ const int BITS_IN_ONE_BYTE = 8;
         if (error == nil) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (!data || (200 != httpResponse.statusCode)) {
-                error = [NSError errorWithDomain:@"RadarKit" code:httpResponse.statusCode userInfo:@{ data: data }];
+                NSDictionary *userInfo = nil;
+                if (data) {
+                    userInfo = @{ @"data": data };
+                }
+                error = [NSError errorWithDomain:@"RadarKit"
+                                            code:httpResponse.statusCode
+                                        userInfo:userInfo];
             }
         }
         if (handler) {
