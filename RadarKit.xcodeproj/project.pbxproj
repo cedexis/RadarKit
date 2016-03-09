@@ -38,7 +38,6 @@
 		3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774AE1B6C31C10024C50D /* CDXLogger.m */; };
 		3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0774B11B6FF9300024C50D /* CDXRadarSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0774B21B6FF9300024C50D /* CDXRadarSession.m */; };
-		3E13B4AA1BB0BF5600C182B7 /* RELEASES.md in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4A91BB0BF5600C182B7 /* RELEASES.md */; };
 		3E13B4BD1BB321DD00C182B7 /* CDXImpact.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4BB1BB321DD00C182B7 /* CDXImpact.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E13B4BE1BB321DD00C182B7 /* CDXImpact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E13B4BC1BB321DD00C182B7 /* CDXImpact.m */; };
 		3E13B4C11BB32A8D00C182B7 /* CDXImpactMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E13B4BF1BB32A8D00C182B7 /* CDXImpactMeasurement.h */; };
@@ -370,7 +369,6 @@
 				16FA43501AC54640000895C9 /* CDXProviderService.m in Sources */,
 				3E0774B01B6C31C10024C50D /* CDXLogger.m in Sources */,
 				3E13B4CA1BB5CDE300C182B7 /* CDXImpactCategory.m in Sources */,
-				3E13B4AA1BB0BF5600C182B7 /* RELEASES.md in Sources */,
 				3E0774B41B6FF9300024C50D /* CDXRadarSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
