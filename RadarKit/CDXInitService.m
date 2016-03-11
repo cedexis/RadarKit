@@ -4,91 +4,116 @@
 //
 //  Created by Jacob Wan on 2015-03-26.
 //  Copyright (c) 2015 Cedexis. All rights reserved.
-//
 
 #import "CDXInitService.h"
 #import "CDXLogger.h"
+#import "CDXErrors.h"
+#import "CDXGlobals.h"
 
 @interface CDXInitService()
 
-@property NSString *currentValue;
-@property NSString *requestSignature;
+@property (nonatomic, strong) CDXInitServiceCompletionBlock serviceCompletionHandler;
+@property (nonatomic, strong) NSString *protocol;
+@property (nonatomic) int zoneId;
+@property (nonatomic) int customerId;
+@property (nonatomic) unsigned long timestamp;
+@property (nonatomic) unsigned long transactionId;
+@property (nonatomic, strong) NSString *userAgentString;
 
 @end
 
 @implementation CDXInitService
 
 const int majorVersion = 0;
-const int minorVersion = 2;
+const int minorVersion = 4;
 const NSString *baseUrl = @"init.cedexis-radar.net";
 
-+(NSString *) urlWithSession:(CDXRadarSession *)session {
-    NSString * flag = @"i";
-    if ([session.radar.protocol isEqualToString:@"https"]) {
-        flag = @"s";
+-(instancetype)initWithSettings:(NSDictionary *)settings
+              completionHandler:(CDXInitServiceCompletionBlock)handler {
+    self = [super init];
+    if (self) {
+        _serviceCompletionHandler = handler;
+        _zoneId = [[settings objectForKey:@"zoneId"] intValue];
+        _customerId = [[settings objectForKey:@"customerId"] intValue];
+        _timestamp = [[settings objectForKey:@"timestamp"] unsignedLongValue];
+        _transactionId = [[settings objectForKey:@"transactionId"] unsignedLongValue];
+        _protocol = [settings objectForKey:@"protocol"];
+        _userAgentString = [settings objectForKey:@"userAgentString"];
     }
-    return [NSString stringWithFormat:@"%@://i1-io-%d-%d-%d-%d-%lu-%@.%@/i1/%lu/%lu/xml?seed=i1-io-%d-%d-%d-%d-%lu-%@",
-            session.radar.protocol,
-            majorVersion,
-            minorVersion,
-            session.radar.zoneId,
-            session.radar.customerId,
-            session.transactionId,
-            flag,
-            baseUrl,
-            session.timestamp,
-            session.transactionId,
-            majorVersion,
-            minorVersion,
-            session.radar.zoneId,
-            session.radar.customerId,
-            session.transactionId,
-            flag
-    ];
+    return self;
 }
 
--(void)getSignatureForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSString *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[CDXInitService urlWithSession:session]];
+-(NSString *)makeInitURL {
+    NSString * flag = @"i";
+    if ([self.protocol isEqualToString:@"https"]) {
+        flag = @"s";
+    }
+    return [NSString stringWithFormat:@"%@://i1-io-%d-%d-%d-%d-%lu-%@.%@/i1/%lu/%lu/json?seed=i1-io-%d-%d-%d-%d-%lu-%@",
+            self.protocol,
+            majorVersion,
+            minorVersion,
+            self.zoneId,
+            self.customerId,
+            self.transactionId,
+            flag,
+            baseUrl,
+            self.timestamp,
+            self.transactionId,
+            majorVersion,
+            minorVersion,
+            self.zoneId,
+            self.customerId,
+            self.transactionId,
+            flag];
+}
+
+-(NSURLSessionDataTask *)beginInitRequest {
+    NSURL *url = [NSURL URLWithString:[self makeInitURL]];
     [[CDXLogger sharedInstance] log:url.description];
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:url
-        cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
+                                             cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                         timeoutInterval:20.0];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": session.userAgent };
-    session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error == nil) {
+    clearNSURLSessionConfiguration(configuration);
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.userAgentString };
+    NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request completionHandler:[self makeInitTaskCompletionHandler]];
+    [task resume];
+    return task;
+}
+
+-(CDXRequestCompletionBlock)makeInitTaskCompletionHandler {
+    return ^(NSData *data,
+             NSURLResponse *response,
+             NSError *error) {
+        [[CDXLogger sharedInstance] log:@"Init request complete"];
+        NSString *requestSignature;
+        if (!error) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if ((nil != data) && (200 == httpResponse.statusCode)) {
-                NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-                [parser setDelegate:self];
-                [parser parse];
-            }
-            else {
+            if (data && (200 == httpResponse.statusCode)) {
+                NSError *jsonError;
+                NSMutableDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+                if (temp) {
+                    requestSignature = [temp objectForKey:@"a"];
+                }
+            } else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (init)"];
-                NSDictionary *userInfo = nil;
+                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                [userInfo setObject:[NSNumber numberWithInteger:httpResponse.statusCode]
+                             forKey:@"httpResponseStatusCode"];
+                [userInfo setObject:NSLocalizedString(@"Radar init error", nil) forKey:NSLocalizedDescriptionKey];
                 if (data) {
-                    userInfo = @{ @"data": data };
+                    [userInfo setObject:data forKey:@"data"];
                 }
                 error = [NSError errorWithDomain:@"RadarKit"
-                                            code:httpResponse.statusCode
+                                            code:CDXErrorTypeInitCommunicationError
                                         userInfo:userInfo];
             }
         }
-        if (handler) {
-            handler(self.requestSignature, error);
+        if (self.serviceCompletionHandler) {
+            self.serviceCompletionHandler(requestSignature, error);
         }
-    }];
-    [session.currentTask resume];
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"requestSignature"]) {
-        self.requestSignature = self.currentValue;
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    self.currentValue = string;
-}
+    };
+};
 
 @end

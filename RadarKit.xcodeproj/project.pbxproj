@@ -22,6 +22,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1663C01A1C8FA3EB00602DB8 /* CDXRadarSession+Processing.h in Headers */ = {isa = PBXBuildFile; fileRef = 1663C0181C8FA3EB00602DB8 /* CDXRadarSession+Processing.h */; };
+		1663C01B1C8FA3EB00602DB8 /* CDXRadarSession+Processing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1663C0191C8FA3EB00602DB8 /* CDXRadarSession+Processing.m */; };
+		1663C01F1C90A6EA00602DB8 /* CDXErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 1663C01E1C90A6EA00602DB8 /* CDXErrors.h */; };
+		1663C0211C90AC1C00602DB8 /* CDXTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1663C0201C90AC1C00602DB8 /* CDXTypes.h */; };
+		1663C0261C90D32500602DB8 /* CDXGlobals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1663C0241C90D32500602DB8 /* CDXGlobals.h */; };
+		1663C0271C90D32500602DB8 /* CDXGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 1663C0251C90D32500602DB8 /* CDXGlobals.m */; };
+		1663C0291C91138B00602DB8 /* RadarKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1663C0281C91138B00602DB8 /* RadarKit-Prefix.pch */; };
 		16FA43241AC51D12000895C9 /* libRadarKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FA43181AC51D12000895C9 /* libRadarKit.a */; };
 		16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43401AC5210B000895C9 /* CDXRadar.m */; };
 		16FA43441AC529F5000895C9 /* CDXInitService.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FA43431AC529F5000895C9 /* CDXInitService.m */; };
@@ -84,6 +91,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1663C0181C8FA3EB00602DB8 /* CDXRadarSession+Processing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CDXRadarSession+Processing.h"; sourceTree = "<group>"; };
+		1663C0191C8FA3EB00602DB8 /* CDXRadarSession+Processing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDXRadarSession+Processing.m"; sourceTree = "<group>"; };
+		1663C01E1C90A6EA00602DB8 /* CDXErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXErrors.h; sourceTree = "<group>"; };
+		1663C0201C90AC1C00602DB8 /* CDXTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXTypes.h; sourceTree = "<group>"; };
+		1663C0241C90D32500602DB8 /* CDXGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXGlobals.h; sourceTree = "<group>"; };
+		1663C0251C90D32500602DB8 /* CDXGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXGlobals.m; sourceTree = "<group>"; };
+		1663C0281C91138B00602DB8 /* RadarKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RadarKit-Prefix.pch"; path = "../../../../../../.Trash/RadarKit-Prefix.pch"; sourceTree = "<group>"; };
 		16FA43181AC51D12000895C9 /* libRadarKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRadarKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FA43231AC51D12000895C9 /* RadarKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FA43291AC51D12000895C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,27 +182,34 @@
 		16FA431A1AC51D12000895C9 /* RadarKit */ = {
 			isa = PBXGroup;
 			children = (
-				16FA43451AC52C33000895C9 /* RadarKit.h */,
-				16FA433F1AC5210B000895C9 /* CDXRadar.h */,
-				16FA43401AC5210B000895C9 /* CDXRadar.m */,
-				16FA43421AC529F5000895C9 /* CDXInitService.h */,
-				16FA43431AC529F5000895C9 /* CDXInitService.m */,
-				16FA434D1AC54640000895C9 /* CDXProviderService.h */,
-				16FA434E1AC54640000895C9 /* CDXProviderService.m */,
-				16FA43551AC55663000895C9 /* CDXProvider.h */,
-				16FA43561AC55663000895C9 /* CDXProvider.m */,
-				16FA43591AC56421000895C9 /* CDXProbe.h */,
-				16FA435A1AC56421000895C9 /* CDXProbe.m */,
-				3E0774AD1B6C31C10024C50D /* CDXLogger.h */,
-				3E0774AE1B6C31C10024C50D /* CDXLogger.m */,
-				3E0774B11B6FF9300024C50D /* CDXRadarSession.h */,
-				3E0774B21B6FF9300024C50D /* CDXRadarSession.m */,
+				1663C0281C91138B00602DB8 /* RadarKit-Prefix.pch */,
+				1663C01E1C90A6EA00602DB8 /* CDXErrors.h */,
+				1663C0241C90D32500602DB8 /* CDXGlobals.h */,
+				1663C0251C90D32500602DB8 /* CDXGlobals.m */,
 				3E13B4BB1BB321DD00C182B7 /* CDXImpact.h */,
 				3E13B4BC1BB321DD00C182B7 /* CDXImpact.m */,
-				3E13B4BF1BB32A8D00C182B7 /* CDXImpactMeasurement.h */,
-				3E13B4C01BB32A8D00C182B7 /* CDXImpactMeasurement.m */,
 				3E13B4C71BB5CDE300C182B7 /* CDXImpactCategory.h */,
 				3E13B4C81BB5CDE300C182B7 /* CDXImpactCategory.m */,
+				3E13B4BF1BB32A8D00C182B7 /* CDXImpactMeasurement.h */,
+				3E13B4C01BB32A8D00C182B7 /* CDXImpactMeasurement.m */,
+				16FA43421AC529F5000895C9 /* CDXInitService.h */,
+				16FA43431AC529F5000895C9 /* CDXInitService.m */,
+				3E0774AD1B6C31C10024C50D /* CDXLogger.h */,
+				3E0774AE1B6C31C10024C50D /* CDXLogger.m */,
+				16FA43591AC56421000895C9 /* CDXProbe.h */,
+				16FA435A1AC56421000895C9 /* CDXProbe.m */,
+				16FA43551AC55663000895C9 /* CDXProvider.h */,
+				16FA43561AC55663000895C9 /* CDXProvider.m */,
+				16FA434D1AC54640000895C9 /* CDXProviderService.h */,
+				16FA434E1AC54640000895C9 /* CDXProviderService.m */,
+				16FA433F1AC5210B000895C9 /* CDXRadar.h */,
+				16FA43401AC5210B000895C9 /* CDXRadar.m */,
+				3E0774B11B6FF9300024C50D /* CDXRadarSession.h */,
+				3E0774B21B6FF9300024C50D /* CDXRadarSession.m */,
+				1663C0181C8FA3EB00602DB8 /* CDXRadarSession+Processing.h */,
+				1663C0191C8FA3EB00602DB8 /* CDXRadarSession+Processing.m */,
+				1663C0201C90AC1C00602DB8 /* CDXTypes.h */,
+				16FA43451AC52C33000895C9 /* RadarKit.h */,
 			);
 			path = RadarKit;
 			sourceTree = "<group>";
@@ -224,8 +245,13 @@
 				3E0774AF1B6C31C10024C50D /* CDXLogger.h in Headers */,
 				16FA43571AC55663000895C9 /* CDXProvider.h in Headers */,
 				3E0774B31B6FF9300024C50D /* CDXRadarSession.h in Headers */,
+				1663C0211C90AC1C00602DB8 /* CDXTypes.h in Headers */,
+				1663C01A1C8FA3EB00602DB8 /* CDXRadarSession+Processing.h in Headers */,
+				1663C0261C90D32500602DB8 /* CDXGlobals.h in Headers */,
 				3E13B4BD1BB321DD00C182B7 /* CDXImpact.h in Headers */,
+				1663C01F1C90A6EA00602DB8 /* CDXErrors.h in Headers */,
 				16FA434A1AC52D73000895C9 /* RadarKit.h in Headers */,
+				1663C0291C91138B00602DB8 /* RadarKit-Prefix.pch in Headers */,
 				16FA434C1AC52DB9000895C9 /* CDXRadar.h in Headers */,
 				3E13B4C91BB5CDE300C182B7 /* CDXImpactCategory.h in Headers */,
 				16FA435B1AC56421000895C9 /* CDXProbe.h in Headers */,
@@ -361,6 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16FA43581AC55663000895C9 /* CDXProvider.m in Sources */,
+				1663C01B1C8FA3EB00602DB8 /* CDXRadarSession+Processing.m in Sources */,
+				1663C0271C90D32500602DB8 /* CDXGlobals.m in Sources */,
 				16FA43411AC5210B000895C9 /* CDXRadar.m in Sources */,
 				3E13B4C21BB32A8D00C182B7 /* CDXImpactMeasurement.m in Sources */,
 				3E13B4BE1BB321DD00C182B7 /* CDXImpact.m in Sources */,
@@ -482,6 +510,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Javier Rosas (2L2378RRSR)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RadarKit-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
@@ -493,6 +523,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Javier Rosas (2L2378RRSR)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RadarKit-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";

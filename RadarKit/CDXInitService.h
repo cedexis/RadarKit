@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDXRadarSession.h"
+typedef void(^CDXInitServiceCompletionBlock)(NSString *, NSError *);
 
-@interface CDXInitService : NSObject<NSXMLParserDelegate>
+@interface CDXInitService : NSObject
 
-+ (NSString *)urlWithSession:(CDXRadarSession *)session;
-- (void)getSignatureForSession:(CDXRadarSession *)radarProcess completionHandler:(void(^)(NSString *requestSignature, NSError *error))handler;
+-(instancetype)initWithSettings:(NSDictionary *)settings completionHandler:(CDXInitServiceCompletionBlock)handler;
+
+-(NSURLSessionDataTask *)beginInitRequest;
 
 @end

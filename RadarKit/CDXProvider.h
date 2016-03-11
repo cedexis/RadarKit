@@ -6,19 +6,17 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDXRadarSession.h"
+@class CDXProbe;
 
 @interface CDXProvider : NSObject
 
-@property (strong, nonatomic) NSDictionary * sample;
-@property (strong, nonatomic) CDXRadarSession * session;
+-(instancetype)initWithRequestorZoneId:(int)requestorZoneId
+                   requestorCustomerId:(int)requestorCustomerId
+                         transactionId:(unsigned long)transactionId
+                              protocol:(NSString *)protocol
+                      requestSignature:(NSString *)requestSignature
+                                sample:(NSDictionary *)sample;
 
--(instancetype)initWithSample:(NSDictionary *)sample
-            session:(CDXRadarSession *)process;
-
--(NSMutableArray *)probes;
-
--(void)measureWithCompletionHandler:(void(^)(NSError *error))handler;
+-(CDXProbe *)getNextProbe;
 
 @end

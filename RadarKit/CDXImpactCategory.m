@@ -9,6 +9,7 @@
 #import "CDXImpact.h"
 #import "CDXImpactCategory.h"
 #import "CDXImpactMeasurement.h"
+#import "CDXGlobals.h"
 
 @implementation CDXImpactCategory
 
@@ -61,6 +62,7 @@
     [request setHTTPMethod:@"POST"];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    clearNSURLSessionConfiguration(configuration);
     configuration.HTTPAdditionalHeaders = @{
                                             @"Authorization": impact.apiKey,
                                             @"Content-Type": @"application/json"

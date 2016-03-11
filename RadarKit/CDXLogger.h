@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface CDXLogger : NSObject
 
 @property (assign, nonatomic) BOOL isVerbose;

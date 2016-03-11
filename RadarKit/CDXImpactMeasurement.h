@@ -6,8 +6,6 @@
 //  Copyright © 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface CDXImpactMeasurement : NSObject
 
 @property (strong, nonatomic, readonly) NSDate *startingTime;

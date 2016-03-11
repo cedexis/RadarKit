@@ -6,25 +6,42 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDXRadar.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@class CDXRadar;
+typedef void(^CDXRadarSessionCompletionBlock)(NSError * _Nullable);
+
+@class CDXProvider;
+@class CDXProbe;
 
 @interface CDXRadarSession : NSObject
 
-@property (strong, nonatomic) CDXRadar *radar;
-@property (assign, nonatomic) unsigned long timestamp;
-@property (assign, nonatomic) unsigned long transactionId;
-@property (strong, nonatomic) NSString * requestSignature;
-@property (strong, nonatomic, readonly) NSString *userAgent;
-@property (strong, nonatomic) NSURLSessionDataTask *currentTask;
-@property (assign, nonatomic, readonly) BOOL wasCancelled;
-@property (strong, nonatomic) NSString *networkType;
-@property (strong, nonatomic) NSString *networkSubtype;
+//@property (nonatomic) NSMutableDictionary *properties;
+@property (nonatomic) NSString *protocol;
+@property (nonatomic) int zoneId;
+@property (nonatomic) int customerId;
+@property (nonatomic) BOOL isThroughputMeasurementAlwaysOn;
 
-- (instancetype)initWithRadar:(CDXRadar *)radar;
+@property (nonatomic) unsigned long timestamp;
+@property (nonatomic) unsigned long transactionId;
+@property (nonatomic) NSString * requestSignature;
+@property (nonatomic, readonly) NSString *userAgentString;
+@property (nonatomic) NSURLSessionDataTask *currentTask;
+@property (nonatomic, readonly) BOOL wasCancelled;
+@property (nonatomic) NSString *networkType;
+@property (nonatomic) NSString *networkSubtype;
+@property (nonatomic, copy) CDXRadarSessionCompletionBlock radarSessionCompletionHandler;
 
-- (void)cancel;
+@property (nonatomic) NSMutableArray *providers;
+@property (nonatomic) CDXProvider *currentProvider;
+@property (nonatomic) CDXProbe *currentProbe;
+
+-(instancetype)initWithZoneId:(int)zoneId
+                   customerId:(int)customerId
+                     protocol:(nonnull NSString *)protocol
+            completionHandler:(CDXRadarSessionCompletionBlock)completionHandler;
+
+-(void)cancel;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -6,8 +6,6 @@
 //  Copyright © 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface CDXImpact : NSObject
 
 @property (strong, nonatomic, readonly) NSString *sessionId;

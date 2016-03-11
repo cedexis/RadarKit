@@ -6,15 +6,12 @@
 //  Copyright (c) 2015 Cedexis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDXInitService.h"
-#import "CDXRadarSession.h"
+typedef void(^CDXProviderServiceCompletionBlock)(NSArray *, NSError *);
 
 @interface CDXProviderService : NSObject
 
--(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *samples, NSError *error))handler;
+-(instancetype)initWithSettings:(NSDictionary *)settings completionHandler:(CDXProviderServiceCompletionBlock)handler;
 
-+ (NSString *)urlForSession:(CDXRadarSession *)session;
-+ (NSString *)randomStringWithLength:(int)len;
+-(NSURLSessionDataTask *)requestSamples;
 
 @end

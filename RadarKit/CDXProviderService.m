@@ -4,63 +4,91 @@
 //
 //  Created by Jacob Wan on 2015-03-27.
 //  Copyright (c) 2015 Cedexis. All rights reserved.
-//
 
 #import "CDXProviderService.h"
 #import "CDXLogger.h"
+#import "CDXGlobals.h"
+#import "CDXErrors.h"
+
+@interface CDXProviderService()
+
+@property (nonatomic, strong) CDXProviderServiceCompletionBlock serviceCompletionHandler;
+@property (nonatomic) int zoneId;
+@property (nonatomic) int customerId;
+@property (nonatomic) unsigned long timestamp;
+@property (nonatomic, strong) NSString *protocol;
+@property (nonatomic, strong) NSString *userAgentString;
+
+@end
 
 @implementation CDXProviderService
 
-+(NSString *) urlForSession:(CDXRadarSession *)session {
-    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1&t=1",
-        session.radar.protocol,
-        session.radar.zoneId,
-        session.radar.customerId,
-        session.timestamp,
-        [self randomStringWithLength:20]
-    ];
+-(instancetype)initWithSettings:(NSDictionary *)settings completionHandler:(CDXProviderServiceCompletionBlock)handler {
+    self = [super init];
+    if (self) {
+        _serviceCompletionHandler = handler;
+        _zoneId = [[settings objectForKey:@"zoneId"] intValue];
+        _customerId = [[settings objectForKey:@"customerId"] intValue];
+        _timestamp = [[settings objectForKey:@"timestamp"] unsignedLongValue];
+        _protocol = [settings objectForKey:@"protocol"];
+        _userAgentString = [settings objectForKey:@"userAgentString"];
+    }
+    return self;
 }
 
--(void)requestSamplesForSession:(CDXRadarSession *)session completionHandler:(void(^)(NSArray *, NSError *))handler {
-    NSURL * url = [NSURL URLWithString:[CDXProviderService urlForSession:session]];
-    [[CDXLogger sharedInstance] log:url.description];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url
-        cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": session.userAgent };
-    session.currentTask = [[NSURLSession sessionWithConfiguration:configuration] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+-(NSString *)makeProvidersRequestURL {
+    return [NSString stringWithFormat:@"%@://radar.cedexis.com/%d/%d/radar/%lu/%@/providers.json?imagesok=1&t=1",
+            self.protocol,
+            self.zoneId,
+            self.customerId,
+            self.timestamp,
+            randomStringWithLength(20)];
+};
+
+-(CDXRequestCompletionBlock)makeTaskCompletionHandler {
+    return ^(NSData *data, NSURLResponse *response, NSError *error) {
+        [[CDXLogger sharedInstance] log:@"Providers request completed"];
         NSMutableArray *samples;
-        if (error == nil) {
+        if (!error) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if ((nil != data) && (200 == httpResponse.statusCode)) {
+            if (data && 200 == httpResponse.statusCode) {
                 samples = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", (unsigned long)samples.count]];
+                [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", samples.count]];
             } else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (ProbeServer)"];
-                NSDictionary *userInfo = nil;
+                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                [userInfo setObject:[NSNumber numberWithInteger:httpResponse.statusCode]
+                             forKey:@"httpResponseStatusCode"];
+                [userInfo setObject:NSLocalizedString(@"Providers request error", nil)
+                             forKey:NSLocalizedDescriptionKey];
                 if (data) {
-                    userInfo = @{ @"data": data };
+                    [userInfo setObject:data forKey:@"data"];
                 }
                 error = [NSError errorWithDomain:@"RadarKit"
-                                            code:httpResponse.statusCode
+                                            code:CDXErrorTypeProbesRequestCommunicationError
                                         userInfo:userInfo];
             }
         }
-        if (handler) {
-            handler(samples, error);
+        if (self.serviceCompletionHandler) {
+            self.serviceCompletionHandler(samples, error);
         }
-    }];
-    [session.currentTask resume];
+    };
 }
 
-// Generates alpha-numeric-random string
-+ (NSString *)randomStringWithLength:(int)length {
-    static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
-    for (int i = 0; i < length; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
-    }
-    return randomString;
+-(NSURLSessionDataTask *)requestSamples {
+    NSURL *url = [NSURL URLWithString:[self makeProvidersRequestURL]];
+    [[CDXLogger sharedInstance] log:url.description];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                             cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20.0];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    clearNSURLSessionConfiguration(configuration);
+    configuration.HTTPAdditionalHeaders = @{ @"User-Agent": self.userAgentString };
+    CDXRequestCompletionBlock requestCompletionHandler = [self makeTaskCompletionHandler];
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:configuration]
+                                  dataTaskWithRequest:request
+                                  completionHandler:requestCompletionHandler];
+    [task resume];
+    return task;
 }
 
 @end

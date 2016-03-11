@@ -7,10 +7,31 @@
 //
 
 #import "CDXRadar.h"
-#import "CDXInitService.h"
-#import "CDXProviderService.h"
-#import "CDXProvider.h"
+#import "CDXRadarSession.h"
+#import "CDXRadarSession+Processing.h"
 #import "CDXLogger.h"
+
+@interface CDXRadar()
+
+/**
+ *  Your Cedexis zone.
+ */
+@property (nonatomic, readonly) int zoneId;
+/**
+ *  Your Cedexis Customer ID. You can find it on https://portal.cedexis.com/ui/radar/tag
+ */
+@property (nonatomic, readonly) int customerId;
+/**
+ *  Specify the protocol to use for the requests. Example: @@"http". Default is @@"https".
+ */
+@property (nonatomic, readonly) NSString *protocol;
+
+/**
+ *  Set to YES to always perform throughput measurements, regardless of the network type
+ */
+@property (nonatomic, readonly) BOOL isThroughputMeasurementAlwaysOn;
+
+@end
 
 @implementation CDXRadar
 
@@ -33,47 +54,17 @@
 # pragma mark - Public methods
 
 -(CDXRadarSession *)runInBackground {
-    return [self runInBackgroundWithCompletionHandler:nil];
+    return [self runInBackgroundWithCompletionHandler:^(NSError *error) {
+        // Do nothing
+    }];
 }
 
--(CDXRadarSession *)runInBackgroundWithCompletionHandler:(void(^)(NSError *))handler {
-    CDXRadarSession *session = [[CDXRadarSession alloc] initWithRadar:self];
-    CDXInitService *initService = [CDXInitService new];
-//    [[CDXLogger sharedInstance] log:cdxInit.description];
-    [initService getSignatureForSession:session completionHandler:^(NSString *requestSignature, NSError *error) {
-        [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Request signature: %@", requestSignature]];
-        if (error) {
-            if (handler) {
-                handler(error);
-            }
-            return;
-        }
-        session.requestSignature = requestSignature;
-        CDXProviderService * providerService = [CDXProviderService new];
-        [providerService requestSamplesForSession:session completionHandler:^(NSArray *samples, NSError *error) {
-            if (error) {
-                if (handler) {
-                    handler(error);
-                }
-            }
-            NSMutableArray *providers = [NSMutableArray array];
-            for (NSDictionary * providerData in samples) {
-                CDXProvider * provider = [[CDXProvider alloc] initWithSample:providerData session:session];
-                [providers addObject:provider];
-            }
-            [self measureWithProviders:providers completionHandler:^(NSError *error) {
-                if (session.wasCancelled) {
-                    [[CDXLogger sharedInstance] log:@"Radar session cancelled"];
-                } else {
-                    [[CDXLogger sharedInstance] log:@"Radar session complete"];
-                }
-                if (handler) {
-                    handler(error);
-                }
-            }];
-        }];
-        
-    }];
+-(CDXRadarSession *)runInBackgroundWithCompletionHandler:(CDXRadarSessionCompletionBlock)handler {
+    CDXRadarSession *session = [[CDXRadarSession alloc] initWithZoneId:self.zoneId
+                                                            customerId:self.customerId
+                                                              protocol:self.protocol
+                                                     completionHandler:handler];
+    [session startAsynchronousProcessing];
     return session;
 }
 
@@ -85,21 +76,5 @@
 }
 
 # pragma mark - Private methods
-
--(void)measureWithProviders:(NSMutableArray *)providers completionHandler:(void(^)(NSError *error))handler {
-    if (providers.count > 0) {
-        CDXProvider *provider = providers.firstObject;
-        [providers removeObjectAtIndex:0];
-        [provider measureWithCompletionHandler:^(NSError *error) {
-            if (error) {
-                handler(error);
-            } else {
-                [self measureWithProviders:providers completionHandler:handler];
-            }
-        }];
-    } else {
-        handler(nil);
-    }
-}
 
 @end

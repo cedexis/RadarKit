@@ -12,34 +12,32 @@
 
 @implementation CDXRadarSession
 
-const NSString *libraryVersion = @"0.3.0";
+const NSString *libraryVersion = @"0.4.0";
 
-- (instancetype)initWithRadar:(CDXRadar *)radar
-{
+-(instancetype)initWithZoneId:(int)zoneId
+                   customerId:(int)customerId
+                     protocol:(NSString *)protocol
+            completionHandler:(CDXRadarSessionCompletionBlock)completionHandler {
     self = [super init];
     if (self) {
-        _radar = radar;
+        _radarSessionCompletionHandler = completionHandler;
+        _zoneId = zoneId;
+        _customerId = customerId;
+        _protocol = protocol;
+        _isThroughputMeasurementAlwaysOn = NO;
         _timestamp = [[NSDate date] timeIntervalSince1970];
         _transactionId = arc4random();
-        _requestSignature = nil;
-        _userAgent = [self userAgentGenerate];
+        UIDevice *device = [UIDevice currentDevice];
+        _userAgentString = [NSString stringWithFormat:@"RadarKit/%@ (%@; iOS %@; http://www.cedexis.com)", libraryVersion, device.model, device.systemVersion];
         _wasCancelled = NO;
         _networkSubtype = [self currentNetworkSubtype];
+        _networkType = @"cellular";
         if ([_networkSubtype isEqualToString:@"wifi"]) {
             _networkType = @"wifi";
-        } else {
-            _networkType = @"cellular";
         }
+        _providers = [[NSMutableArray alloc] init];
     }
     return self;
-}
-    
--(NSString *)userAgentGenerate {
-    UIDevice *device = [UIDevice currentDevice];
-    return [NSString stringWithFormat:@"RadarKit/%@ (%@; iOS %@; http://www.cedexis.com)",
-        libraryVersion,
-        device.model,
-        device.systemVersion];
 }
 
 -(void)cancel {
