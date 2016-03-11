@@ -27,9 +27,10 @@ Pod::Spec.new do |s|
     s.author        = { "Jacob Wan" => "jacob@wildlemur.com" }
     s.source        = { :git => "https://github.com/cedexis/RadarKit.git", :tag => s.version.to_s }
 
-    s.platform      = :ios, '7.0'
+    s.platform      = :ios, '9.0'
     s.requires_arc  = true
     s.frameworks    = ['Foundation', 'SystemConfiguration']
 
     s.source_files  = "RadarKit/*.{h,m}"
+    s.prefix_header_file = "RadarKit-Prefix.pch"
 end
