@@ -97,7 +97,8 @@
 		1663C0201C90AC1C00602DB8 /* CDXTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXTypes.h; sourceTree = "<group>"; };
 		1663C0241C90D32500602DB8 /* CDXGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXGlobals.h; sourceTree = "<group>"; };
 		1663C0251C90D32500602DB8 /* CDXGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXGlobals.m; sourceTree = "<group>"; };
-		1663C0281C91138B00602DB8 /* RadarKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RadarKit-Prefix.pch"; path = RadarKit-Prefix.pch; sourceTree = SOURCE_ROOT; };
+		1663C0281C91138B00602DB8 /* RadarKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RadarKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		169807231C92FA46006A0BCD /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		16FA43181AC51D12000895C9 /* libRadarKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRadarKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FA43231AC51D12000895C9 /* RadarKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FA43291AC51D12000895C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 		16FA430F1AC51D12000895C9 = {
 			isa = PBXGroup;
 			children = (
+				169807231C92FA46006A0BCD /* Makefile */,
 				3E13B4AB1BB0C10400C182B7 /* RadarKit.podspec */,
 				3E13B4A91BB0BF5600C182B7 /* RELEASES.md */,
 				3E3B93FE1B9524F50046D9AB /* CoreTelephony.framework */,
