@@ -1,5 +1,9 @@
 # RELEASES
 
+## 0.4.1
+
+* Fix compiler warning.
+
 ## 0.4.0
 
 * Refactored for simpler object ownership and reduced memory usage.
