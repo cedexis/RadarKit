@@ -53,7 +53,7 @@
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (data && 200 == httpResponse.statusCode) {
                 samples = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", samples.count]];
+                [[CDXLogger sharedInstance] log:[NSString stringWithFormat:@"Providers found: %lu", (unsigned long)samples.count]];
             } else {
                 [[CDXLogger sharedInstance] log:@"Radar communication error (ProbeServer)"];
                 NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
