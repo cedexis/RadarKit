@@ -1,5 +1,9 @@
 # RELEASES
 
+## 0.4.3
+
+* Update Podspec.
+
 ## 0.4.2
 
 * Fix project reference to RadarKit-Prefix.pch.

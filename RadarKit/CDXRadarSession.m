@@ -12,7 +12,7 @@
 
 @implementation CDXRadarSession
 
-const NSString *libraryVersion = @"0.4.2";
+const NSString *libraryVersion = @"0.4.3";
 
 -(instancetype)initWithZoneId:(int)zoneId
                    customerId:(int)customerId
