@@ -1,5 +1,9 @@
 # RELEASES
 
+## 0.4.0
+
+* Refactored for simpler object ownership and reduced memory usage.
+
 ## 0.2.2
 
 * Use radar protocol on reports
