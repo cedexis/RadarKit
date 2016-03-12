@@ -1,5 +1,5 @@
 ### Attributes ###
-LIBRARY_VERSION=0.4.3
+LIBRARY_VERSION=0.4.4
 
 ### Targets ###
 

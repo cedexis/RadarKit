@@ -1,5 +1,9 @@
 # RELEASES
 
+## 0.4.4
+
+* Update Podspec setting minimum iOS version to 8.1.
+
 ## 0.4.3
 
 * Update Podspec.
