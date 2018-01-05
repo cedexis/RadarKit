@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param handler Block of code to execute when the Radar session has finished.
  */
--(CDXRadarSession *)runInBackgroundWithCompletionHandler:(nonnull void(^)(NSError *error))handler;
+-(CDXRadarSession *)runInBackgroundWithCompletionHandler:(nonnull void(^)(NSError * _Nullable error))handler;
 
 @end
 NS_ASSUME_NONNULL_END
