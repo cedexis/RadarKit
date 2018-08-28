@@ -2,7 +2,6 @@
 
 ### Quick Start
 
- * Copy either the Objective-C or Swift files to your project.
  * Add the CocoaPod. "RadarKit" or "RadarKit/ObjC"
  * Create an instance of the RadarKit class.
  * Call the start method with your zoneId and customerId.
