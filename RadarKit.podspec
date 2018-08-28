@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name          = "RadarKit"
     spec.version       = "1.0.0"
-    spec.summary       = "Citrix ITM Radar client WebKit wrapper."
+    spec.summary       = "Citrix ITM Radar Runner for Apple iOS and MacOS."
     spec.homepage      = "https://github.com/cedexis/radarkit"
     spec.author        = { "David Turnbull" => "david.turnbull@citrix.com" }
     spec.source        = { :git => "https://github.com/cedexis/RadarKit.git", :tag => spec.version.to_s }
