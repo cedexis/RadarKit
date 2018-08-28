@@ -20,7 +20,7 @@ import WebKit
 public class RadarKit : NSObject, WKNavigationDelegate {
 
     public func start(forZoneId: Int, customerId: Int) {
-        commands.append("cedexis.start(\(zoneId),\(customerId),\(clientProfile),\(clientProfileVersion));");
+        commands.append("cedexis.start(\(forZoneId),\(customerId),\(clientProfile),\(clientProfileVersion));");
         process()
     }
 
