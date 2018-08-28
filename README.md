@@ -1,4 +1,4 @@
-# Citrix ITM Radar Runner for Apple OS X and iOS
+# Citrix ITM Radar Runner for Apple iOS and MacOS
 
 ### Quick Start
 
