@@ -94,5 +94,13 @@ that after calling this there is startup cost the next time `start` is called.
 
 ### Notes
 
-All this does is load our radar tag in a WebView with a little bit of throttling.
-Because WebView is a UI element you must call the API on the UI thread.
+All this does is load our radar tag in a WebView with a little bit of throttling
+to handle the case where someone isn't connected to the internet.
+
+Because WebView is a UI element you must call the API on the main UI thread.
+https://developer.apple.com/documentation/code_diagnostics/main_thread_checker
+
+You can confirm it's working in the `Develop` tab of Safari on your Mac.
+For example, there will be a menu entry for `Simulator` which should have
+a submenu that contains `radar.cedexis.com - radar.html`. If you see the
+`radar.html` part then WebKit is successfully running the radar client.
