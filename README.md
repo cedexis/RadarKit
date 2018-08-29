@@ -12,7 +12,7 @@
 Step by step guide for Xcode 8 and Swift. We'll create the simplest possible
 application with the Radar client embedded.
 
- * Create a new iOS project as a "Single View Application". Give it a name and
+ * Create a new iOS project as a "Single View App". Give it a name and
    make sure the language option is set to "Swift".
 
  * Add the CocoaPod to your `Podfile` and `pod install`.
@@ -48,7 +48,7 @@ application with the Radar client embedded.
 Step by step guide for Xcode 8 and Objective-C. We'll create the simplest
 possible application with the Radar client embedded.
 
- * Create a new iOS project as a "Single View Application". Give it a name and
+ * Create a new iOS project as a "Single View App". Give it a name and
    make sure the language option is set to "Objective-C".
 
 * Add the CocoaPod to your `Podfile` and `pod install`.
