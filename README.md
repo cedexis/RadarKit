@@ -24,6 +24,7 @@ application with the Radar client embedded.
    it looks like the code below. You will need to use your real zone ID and
    customer ID for this to actually send data, but it's ok to test with 00000.
 
+       import UIKit
        import RadarKit
 
        class ViewController: UIViewController {
