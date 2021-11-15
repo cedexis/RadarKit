@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.frameworks    = ['Foundation', 'WebKit']
     spec.ios.deployment_target = '8.0'
     spec.osx.deployment_target = '10.10'
-    spec.swift_version = '3.2'
+    spec.swift_version = '5.0'
     spec.default_subspec = 'Swift'
     spec.subspec 'Swift' do |sw|
         sw.source_files  = "RadarKit.swift"
