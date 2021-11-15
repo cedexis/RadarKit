@@ -21,7 +21,7 @@
 // 4 is the client profile for iOS (Objective-C)
 const int CLIENT_PROFILE = 4;
 // The profile version expresses the version of the Radar runner code used to invoke the webview
-const int CLIENT_PROFILE_VERSION = 1;
+const int CLIENT_PROFILE_VERSION = 2;
 
 @interface RadarKit()
 {

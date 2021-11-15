@@ -34,7 +34,7 @@ public class RadarKit : NSObject, WKNavigationDelegate {
     private let clientProfile = 1
     // The profile version expresses the version of the Radar runner code used
     // to invoke the webview
-    private let clientProfileVersion = 1
+    private let clientProfileVersion = 2
     private var commands: [String] = []
     private var hibernateUntil = Date()
 
