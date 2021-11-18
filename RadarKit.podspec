@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
     spec.author        = { "David Turnbull" => "david.turnbull@citrix.com" }
     spec.source        = { :git => "https://github.com/cedexis/RadarKit.git", :tag => spec.version.to_s }
     spec.frameworks    = ['Foundation', 'WebKit']
-    spec.ios.deployment_target = '8.0'
+    spec.ios.deployment_target = '9.0'
     spec.osx.deployment_target = '10.10'
     spec.swift_version = '5.0'
     spec.default_subspec = 'Swift'
