@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name          = "RadarKit"
-    spec.version       = "1.1.0"
+    spec.version       = "1.2.0"
     spec.summary       = "Citrix ITM Radar Runner for Apple iOS and MacOS."
     spec.homepage      = "https://github.com/cedexis/radarkit"
     spec.author        = { "David Turnbull" => "david.turnbull@citrix.com" }
